@@ -3,7 +3,7 @@
     <center>
       <v-card>
         <v-toolbar dense elevation="0" color="#20929D" class="white--text">
-            <v-toolbar-title>VHIWEB</v-toolbar-title>
+            <v-toolbar-title>Karakterisasi</v-toolbar-title>
         </v-toolbar>
         <h1 v-if="error.statusCode === 404">
           {{ pageNotFound }}

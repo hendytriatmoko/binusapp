@@ -1,92 +1,113 @@
 <template>
   <div>
     <app-bar />
-    <v-card width="500px">
-      <v-file-input
-        v-model="file"
-        @change="updateFile()"
-        truncate-length="15"
-      ></v-file-input>
-    </v-card>
-    <v-row  class="ma-6">
+    
+    <v-row no-gutters  class="ma-6">
       <v-col cols="6">
-        <v-card height="60vh">
+        <v-card class="pa-3 mx-2">
+          <v-file-input
+            v-model="file"
+            @change="updateFile()"
+            truncate-length="15"
+          ></v-file-input>
+          <v-card-actions>
+            <v-spacer/>
+            <v-btn @click="readInput()" color="#0A2A62" class="white--text">Read</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+      <v-col cols="6">
+        <v-card height="60vh" class="mx-2">
           <v-textarea v-model="putusan1" height="60vh" label="Data Putusan" outlined></v-textarea>
         </v-card>
       </v-col>
-      <v-col cols="10">
-        <v-card class="pa-2">
-          <div ref="testHtml">
-            <div class="text-center">Karakterisasi Putusan Hakim <br> <span v-if="nomorPutusan != ''" class="red--text">{{ nomorPutusan }}</span> </div>
-            <br>
-            <div>
-              <div v-if="perbuatanTerdakwa != ''">
-                Kaidah Yurisprudensi: <br>
-                <span class="red--text">{{ perbuatanTerdakwa }}</span>. <br><br>
-              </div>
-              Anotasi Oleh: <br>
-              <!-- <div class="text-center">
-                <span class="red--text">{{ 'JUDUL' }}</span>
-                <br><br>
-              </div> -->
-              <div v-if="primair != '' || subsidiair != ''">
-                <div v-if="primair != ''">
-                  <span class="red--text">{{ primair }}</span>;
-                </div>
-                <div v-if="subsidiair != ''">
-                  <br>
-                  <span class="red--text">{{ subsidiair }}</span>
-                </div>
-                <br>
-              </div>
-              <div v-if="pertimbanganDakwaan != ''">
-                Majelis Hakim Kasasi memberikan pertimbangan hukum untuk terdakwa.
-                <br>
-                Dalam pertimbangannya, 
-               <span class="red--text">{{ pertimbanganDakwaan }}</span>
-                <br><br>
-              </div>
-              <div v-if="yurisprudensi != ''">
-                <span class="red--text">{{ yurisprudensi }}</span>.
-                <br><br>
-              </div>
-              <!-- <span class="red--text">{{ 'FAKTA PERSIDANGAN' }}</span>
-              <br><br>
-              Selain itu, majelis hakim juga menyatakan dalam pertimbangannya bahwa <span class="red--text">{{ 'judex facti' }}</span>
-              <br><br> -->
-              <div v-if="faktorPemberat != '' || faktorPeringan != ''">
-                <table style="width:100%">
-                  <tr>
-                    <th v-if="faktorPemberat != ''">Faktor Pemberat</th>
-                    <th v-if="faktorPeringan != ''">Faktor Peringan</th>
-                  </tr>
-                  <tr>
-                    <td v-if="faktorPemberat != ''"><span class="red--text">{{ faktorPemberat }}</span></td>
-                    <td v-if="faktorPeringan != ''"><span class="red--text">{{ faktorPeringan }}</span></td>
-                  </tr>
-                </table>
-                <br>
-              </div>
-              <div v-if="pasalKasasi != ''">
-                Menimbang bahwa karena Terdakwa dipidana, maka dibebani untuk membayar biaya perkara pada tingkat kasasi.
-                <span class="red--text">{{ pasalKasasi }}</span>
-              </div>
-            </div>
-          </div>
-        </v-card>
-      </v-col>
     </v-row>
-    <v-card-actions class="mr-6">
-      <v-spacer />
-      <v-btn @click="dataPutusan()">Execute</v-btn>
-      <v-btn @click="download()" v-if="done==true" outlined>Download</v-btn>
-    </v-card-actions>
+    <center>
+      <v-btn color="#0A2A62" @click="dataPutusan()" class="mx-2 white--text">
+        Execute <v-icon class="ml-2">mdi-send-outline</v-icon>
+      </v-btn>
+      <v-btn outlined color="#0A2A62" @click="download()" v-if="done==true" class="mx-2">
+        Download <v-icon>mdi-download</v-icon>
+      </v-btn>
+    </center>
+    <br>
+    <center v-if="loading">
+      <v-progress-circular
+        indeterminate
+        color="red"
+      ></v-progress-circular>
+      <span class="ml-4">Mohon tunggu sebentar ...</span>
+    </center>
+    <v-card v-if="done" width="53%" style="margin:0 auto" class="pa-2">
+      <div ref="testHtml">
+        <div class="text-center">Karakterisasi Putusan Hakim <br> <span v-if="nomorPutusan != ''" class="red--text">{{ nomorPutusan }}</span> </div>
+        <br>
+        <div>
+          <div v-if="perbuatanTerdakwa != ''">
+            Kaidah Yurisprudensi: <br>
+            <span class="red--text">{{ perbuatanTerdakwa }}</span>. <br><br>
+          </div>
+          Anotasi Oleh: <br>
+          <!-- <div class="text-center">
+            <span class="red--text">{{ 'JUDUL' }}</span>
+            <br><br>
+          </div> -->
+          <div v-if="primair != '' || subsidiair != '' || subsidair != ''">
+            <div v-if="primair != ''">
+              <span class="red--text">{{ primair }}</span>;
+            </div>
+            <div v-if="subsidiair != ''">
+              <br>
+              <span class="red--text">{{ subsidiair }}</span>
+            </div>
+            <div v-if="subsidair != ''">
+              <br>
+              <span class="red--text">{{ subsidair }}</span>
+            </div>
+            <br>
+          </div>
+          <div v-if="pertimbanganDakwaan != ''">
+            Majelis Hakim Kasasi memberikan pertimbangan hukum untuk terdakwa.
+            <br>
+            Dalam pertimbangannya, 
+            <span class="red--text">{{ pertimbanganDakwaan }}</span>
+            <br><br>
+          </div>
+          <div v-if="yurisprudensi != ''">
+            <span class="red--text">{{ yurisprudensi }}</span>.
+            <br><br>
+          </div>
+          <!-- <span class="red--text">{{ 'FAKTA PERSIDANGAN' }}</span>
+          <br><br>
+          Selain itu, majelis hakim juga menyatakan dalam pertimbangannya bahwa <span class="red--text">{{ 'judex facti' }}</span>
+          <br><br> -->
+          <div v-if="faktorPemberat != '' || faktorPeringan != ''">
+            <table style="width:100%">
+              <tr>
+                <th v-if="faktorPemberat != ''">Faktor Pemberat</th>
+                <th v-if="faktorPeringan != ''">Faktor Peringan</th>
+              </tr>
+              <tr>
+                <td v-if="faktorPemberat != ''"><span class="red--text">{{ faktorPemberat }}</span></td>
+                <td v-if="faktorPeringan != ''"><span class="red--text">{{ faktorPeringan }}</span></td>
+              </tr>
+            </table>
+            <br>
+          </div>
+          <div v-if="pasalKasasi != ''">
+            Menimbang bahwa karena Terdakwa dipidana, maka dibebani untuk membayar biaya perkara pada tingkat kasasi.
+            <span class="red--text">{{ pasalKasasi }}</span>
+          </div>
+        </div>
+      </div>
+    </v-card>
   </div>
 </template>
 
 <script>
 import { jsPDF } from "jspdf";
 import { mapActions } from 'vuex'
+// import extractText from 'office-text-extractor'
 export default {
   name: 'IndexPage',
   components: {
@@ -345,12 +366,15 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
   primair:'',
   file:'',
   subsidiair:'',
+  subsidair:'',
   pertimbanganDakwaan:'',
   yurisprudensi:'',
   faktorPemberat:'',
   faktorPeringan:'',
   pasalKasasi:'',
   done:false,
+  loading:false,
+  value:0,
   }),
 
   methods: {
@@ -360,15 +384,20 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
     }),
     async dataPutusan(){
       // console.log('putusan', this.putusan1)
-      this.getNoPutusan()
-      this.getPerbuatanTerdakwa()
-      this.getPrimSub()
-      this.getPertimbanganDakwaan()
-      this.getYurisprudensi()
-      this.getFaktorPemberat()
-      this.getFaktorPeringan()
-      this.getPasalKasasi()
-      this.done= true
+      this.done = false
+      this.loading = true
+      setTimeout(() => {
+        this.getNoPutusan()
+        this.getPerbuatanTerdakwa()
+        this.getPrimSub()
+        this.getPertimbanganDakwaan()
+        this.getYurisprudensi()
+        this.getFaktorPemberat()
+        this.getFaktorPeringan()
+        this.getPasalKasasi()
+        this.done = true
+        this.loading = false
+      }, 5000)
     },
     getNoPutusan(){
       let x = this.putusan1.toLowerCase().search('nomor')
@@ -391,9 +420,13 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
       let y = this.putusan1.substr(x).toLowerCase().search(';')
       this.primair = this.putusan1.slice(x, x+y);
 
+      let f = this.putusan1.toLowerCase().search('subsidiair')
+      let g = this.putusan1.substr(f).toLowerCase().search(';')
+      this.subsidiair = this.putusan1.slice(f, f+g);
+
       let a = this.putusan1.toLowerCase().search('subsidair')
       let b = this.putusan1.substr(a).toLowerCase().search(';')
-      this.subsidiair = this.putusan1.slice(a, a+b);
+      this.subsidair = this.putusan1.slice(a, a+b);
     },
     getPertimbanganDakwaan(){
       
@@ -460,6 +493,7 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
         });
     },
     async updateFile(){
+      // const pdf = require("pdf-extraction");
       // console.log('hhg', [this.file])
       // const text = await new Response(this.file).text();
       // console.log('text', text)
@@ -469,7 +503,12 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
       // pdfparse(pdfFile).then(function(data){
       //   console.log(data.text)
       // })
-      
+    },
+    readInput(){
+      const file = this.file
+      const reader = new FileReader()
+      reader.onload = e => this.putusan1 = e.target.result
+      reader.readAsText(this.file)
     }
   },
   created(){

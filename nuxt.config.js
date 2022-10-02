@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 import webpack from 'webpack'
+var fs=require('fs')
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -25,7 +26,7 @@ export default {
   },
 
   server: {
-    port: 30,
+    port: 90,
     host: '0.0.0.0'
   },
 
@@ -87,6 +88,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend (config, { isDev, isClient }) {
+
+      config.node= {
+         fs: 'empty'
+       }
+
+      // ....
+   },
     plugins: [
       new webpack.ProvidePlugin({
         'window.Quill': 'quill/dist/quill.js',

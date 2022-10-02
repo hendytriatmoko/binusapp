@@ -5,7 +5,7 @@
       app
     >
       <!-- <v-img style="cursor:pointer" max-width="180px" @click="to('/')" src="/asabri_white.png" alt=""></v-img> -->
-      <h2 class="white--text">Binus App</h2>
+      <h2 class="white--text">Karakterisasi</h2>
       <v-spacer />
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
