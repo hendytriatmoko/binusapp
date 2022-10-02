@@ -1,15 +1,22 @@
 <template>
   <div>
     <app-bar />
+    <v-card width="500px">
+      <v-file-input
+        v-model="file"
+        @change="updateFile()"
+        truncate-length="15"
+      ></v-file-input>
+    </v-card>
     <v-row  class="ma-6">
       <v-col cols="6">
         <v-card height="60vh">
           <v-textarea v-model="putusan1" height="60vh" label="Data Putusan" outlined></v-textarea>
         </v-card>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="10">
         <v-card class="pa-2">
-          <div>
+          <div ref="testHtml">
             <div class="text-center">Karakterisasi Putusan Hakim <br> <span v-if="nomorPutusan != ''" class="red--text">{{ nomorPutusan }}</span> </div>
             <br>
             <div>
@@ -72,11 +79,13 @@
     <v-card-actions class="mr-6">
       <v-spacer />
       <v-btn @click="dataPutusan()">Execute</v-btn>
+      <v-btn @click="download()" v-if="done==true" outlined>Download</v-btn>
     </v-card-actions>
   </div>
 </template>
 
 <script>
+import { jsPDF } from "jspdf";
 import { mapActions } from 'vuex'
 export default {
   name: 'IndexPage',
@@ -334,12 +343,14 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
   perbuatanTerdakwa:'',
   judul:'',
   primair:'',
+  file:'',
   subsidiair:'',
   pertimbanganDakwaan:'',
   yurisprudensi:'',
   faktorPemberat:'',
   faktorPeringan:'',
   pasalKasasi:'',
+  done:false,
   }),
 
   methods: {
@@ -357,6 +368,7 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
       this.getFaktorPemberat()
       this.getFaktorPeringan()
       this.getPasalKasasi()
+      this.done= true
     },
     getNoPutusan(){
       let x = this.putusan1.toLowerCase().search('nomor')
@@ -422,6 +434,42 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
         let y = this.putusan1.substr(x).toLowerCase().search(';')
         this.pasalKasasi = this.putusan1.slice(x, x+y);
       }
+    },
+
+    async download(){
+        var doc = new jsPDF('p', 'px', [700,900]);
+        let margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+        
+        // doc.html(this.$refs.testHtml, 40, 80,{
+        //     'width' : 522
+        // });
+        var nama = 'karakterisasi.pdf'
+        // doc.save('test.pdf');
+        doc.html(this.$refs.testHtml, {
+            margin:[20,15,20,15],
+            callback: function(doc) {
+                doc.save(nama);
+            },
+            x: 10,
+            y: 10,
+        });
+    },
+    async updateFile(){
+      // console.log('hhg', [this.file])
+      // const text = await new Response(this.file).text();
+      // console.log('text', text)
+      // const fs = require('fs')
+      // const pdfparse = require('pdf-parse')
+      // const pdfFile = fs.readFileSync('/static/karakterisasi (11).pdf')
+      // pdfparse(pdfFile).then(function(data){
+      //   console.log(data.text)
+      // })
+      
     }
   },
   created(){
