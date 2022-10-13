@@ -1,37 +1,27 @@
 <template>
    
-    <v-footer
-      v-bind="localAttrs"
-      bottom
-      paddless 
+   <v-footer
+      padless
+      color="primary"
+      dark
       class="footer"
     >
-      <v-card
-        flat
-        tile
-        width="100%"
-        class="red lighten-1 text-center"
+    <v-row
+        justify="center"
+        class="my-4 text-center"
       >
-        <v-card-text>
+        <v-col cols="12">
           <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            class="mx-4"
-            icon
-          >
-            <v-icon size="24px">
-              {{ icon }}
-            </v-icon>
+            href="#"
+            v-for="link in links"
+            :key="link"
+            text
+            dark
+            >{{ link }}
           </v-btn>
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-        </v-card-text>
-      </v-card>
-      
+        </v-col>
+        <v-col cols="12">&copy; 2022 Binus</v-col>
+      </v-row>
     </v-footer>
 
     
@@ -42,6 +32,9 @@
   export default {
       name: "Footer",
     //   components: { FooterPage }
+    data: () => {
+    return { links: ['Lorem', 'Lorem', 'Lorem'] };
+  },
   };
   </script>
   

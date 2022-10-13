@@ -1,29 +1,22 @@
 <template>
-  <v-app-bar
-      color="#0A2A62"
-      fixed
-      app
-    >
-      <!-- <v-img style="cursor:pointer" max-width="180px" @click="to('/')" src="/asabri_white.png" alt=""></v-img> -->
-      <h2 class="white--text">Karakterisasi</h2>
-      <v-spacer />
-      <v-menu offset-y>
+  <div>
+    <v-app-bar app color="#34AAE2" dark hide-on-scroll>
+      <v-app-bar-nav-icon> </v-app-bar-nav-icon>
+      <!-- <v-app-bar-title>Karakterikasi</v-app-bar-title> -->
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+      <v-menu left bottom>
         <template v-slot:activator="{ on, attrs }">
-          <v-icon
-          v-bind="attrs"
-          v-on="on" class="ml-3" color="white" large>mdi-account-circle</v-icon>
+          <v-btn icon v-bind="attrs" v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
         </template>
-        <v-list>
-          <v-list-item
-            v-for="(item, index) in items"
-            :key="index"
-            :to="item.route"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
       </v-menu>
     </v-app-bar>
+    
+  </div>
 </template>
 
 <script>

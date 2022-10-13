@@ -1,27 +1,79 @@
 <template>
   <div>
+  <v-container grid-list-md>
     <app-bar />
     <first-section />
-    <v-row no-gutters  class="ma-6">
-      <v-col cols="6">
-        <v-card class="pa-3 mx-2">
-          <v-file-input
-            v-model="file"
-            @change="updateFile()"
-            truncate-length="15"
-          ></v-file-input>
-          <v-card-actions>
+      <v-layout row wrap>
+        <v-flex d-flex xs12 sm6 md6>
+          <v-layout row wrap>
+            <v-flex>
+              <v-card :style="'border: 1px solid #EDEDED; box-shadow: none; '">
+                <v-card-title primary class="title">Lorem</v-card-title>
+                <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto sint adipisci beatae, repellat eligendi soluta voluptas maiores dolorem officiis repudiandae eveniet mollitia nisi ut deleniti harum dolores dolore quae.</v-card-text>
+                <v-container>
+                    <v-file-input 
+                      :style="'box-shadow: none;'" 
+                      prepend-icon="" 
+                      outlined label="Input File Resource"
+                      v-model="file"
+                      @change="updateFile()"
+                      truncate-length="15"
+                    >
+                    </v-file-input>
+                </v-container>
+                
+                <v-card-actions>
             <v-spacer/>
-            <v-btn @click="readInput()" color="#0A2A62" class="white--text">Read</v-btn>
+            <v-btn @click="readInput()" color="#0A2A62" class="white--text mr-5 my-5 py-5 px-10">Read</v-btn>
           </v-card-actions>
-        </v-card>
-      </v-col>
-      <v-col cols="6">
-        <v-card height="60vh" class="mx-2">
-          <v-textarea v-model="putusan1" height="60vh" label="Data Putusan" outlined></v-textarea>
-        </v-card>
-      </v-col>
-    </v-row>
+              </v-card>
+            </v-flex>
+            <v-flex>
+              <v-card :style="'border: 1px solid #EDEDED; box-shadow: none; '">
+                <v-card-title class="title">Lorem</v-card-title>
+                <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto sint adipisci beatae, repellat eligendi soluta voluptas maiores dolorem officiis repudiandae eveniet mollitia nisi ut deleniti harum dolores dolore quae.}</v-card-text>
+                <v-container>
+                  <v-textarea 
+                    v-model="putusan1" 
+                    label="Read Source" 
+                    outlined
+                  >
+                  </v-textarea>
+                  <v-card-actions>
+                    <v-spacer/>
+                    <v-btn 
+                      color="#0A2A62" 
+                      @click="dataPutusan()" 
+                      class="white--text"
+                    >
+                      Execute 
+                      <v-icon 
+                        class="ml-2"
+                      >
+                        mdi-send-outline
+                      </v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                  
+                  </v-container>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+
+        <v-flex d-flex xs12 sm6 md6>
+          <v-card :style="'border: 1px solid black; box-shadow: none; min-height: 50vh'">
+            <v-card-title primary class="title">Lorem</v-card-title>
+            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto sint adipisci beatae, repellat eligendi soluta voluptas maiores dolorem officiis repudiandae eveniet mollitia nisi ut deleniti harum dolores dolore quae.</v-card-text>
+              <v-container>
+              <v-card-actions> 
+                  <v-textarea rows="1" label="Characterization Results" outlined></v-textarea>
+              </v-card-actions> 
+            </v-container>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    
     <center>
       <v-btn color="#0A2A62" @click="dataPutusan()" class="mx-2 white--text">
         Execute <v-icon class="ml-2">mdi-send-outline</v-icon>
@@ -104,8 +156,9 @@
       </div>
     </v-card>
     <TesttVue />
-    <footer-section />
-  </div>
+  </v-container>
+  <footer-section />
+</div>
 </template>
 
 <script>

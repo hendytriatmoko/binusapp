@@ -22,7 +22,8 @@
   
   <style scoped>
     h2.intro-text {
-      font-size: 50px;
+      font-size: 60px;
+      padding-top: 30px;
       font-weight: bold;
       color: #444;
     }
