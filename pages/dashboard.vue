@@ -7,30 +7,43 @@
         <v-flex d-flex xs12 sm6 md6>
           <v-layout row wrap>
             <v-flex>
-              <v-card :style="'border: 1px solid #EDEDED; box-shadow: none; '">
-                <v-card-title primary class="title">Lorem</v-card-title>
+              <v-card :style="'border: 1px solid #EDEDED; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; '">
+                <v-card-title primary class="title">File Resource</v-card-title>
                 <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto sint adipisci beatae, repellat eligendi soluta voluptas maiores dolorem officiis repudiandae eveniet mollitia nisi ut deleniti harum dolores dolore quae.</v-card-text>
                 <v-container>
-                    <v-file-input 
-                      :style="'box-shadow: none;'" 
-                      prepend-icon="" 
-                      outlined label="Input File Resource"
-                      v-model="file"
-                      @change="updateFile()"
-                      truncate-length="15"
-                    >
-                    </v-file-input>
+                  <v-file-input 
+                    :style="'box-shadow: none;'" 
+                    prepend-icon="" 
+                    outlined label="Input File Resource"
+                    v-model="file"
+                    @change="updateFile()"
+                    truncate-length="15"
+                  >
+                  </v-file-input>
                 </v-container>
-                
+              
                 <v-card-actions>
-            <v-spacer/>
-            <v-btn @click="readInput()" color="#0A2A62" class="white--text mr-5 my-5 py-5 px-10">Read</v-btn>
-          </v-card-actions>
+                  <v-spacer/>
+                    <v-btn 
+                      @click="readInput()" 
+                      color="#0A2A62" 
+                      class="white--text mr-5 my-5 py-5 px-10"
+                      :style="'font-size: 12px; width: 130px'"
+                    >
+                      Read
+                      <v-icon 
+                        class="ml-2"
+                        :style="'font-size: 14px'"
+                      >
+                        mdi-note
+                      </v-icon>
+                    </v-btn>
+                  </v-card-actions>
               </v-card>
             </v-flex>
             <v-flex>
-              <v-card :style="'border: 1px solid #EDEDED; box-shadow: none; '">
-                <v-card-title class="title">Lorem</v-card-title>
+              <v-card :style="'border: 1px solid #EDEDED; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; '">
+                <v-card-title class="title">Read Resource</v-card-title>
                 <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto sint adipisci beatae, repellat eligendi soluta voluptas maiores dolorem officiis repudiandae eveniet mollitia nisi ut deleniti harum dolores dolore quae.}</v-card-text>
                 <v-container>
                   <v-textarea 
@@ -44,13 +57,15 @@
                     <v-btn 
                       color="#0A2A62" 
                       @click="dataPutusan()" 
-                      class="white--text"
+                      class="white--text mr-5 my-5 py-5 px-10"
+                      :style="'font-size: 12px; width: 130px'"
                     >
                       Execute 
                       <v-icon 
                         class="ml-2"
+                        :style="'font-size: 14px'"
                       >
-                        mdi-send-outline
+                        mdi-send
                       </v-icon>
                     </v-btn>
                   </v-card-actions>
@@ -62,99 +77,130 @@
         </v-flex>
 
         <v-flex d-flex xs12 sm6 md6>
-          <v-card :style="'border: 1px solid black; box-shadow: none; min-height: 50vh'">
-            <v-card-title primary class="title">Lorem</v-card-title>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto sint adipisci beatae, repellat eligendi soluta voluptas maiores dolorem officiis repudiandae eveniet mollitia nisi ut deleniti harum dolores dolore quae.</v-card-text>
+          <v-card :style="'border: 2px solid #D8D9CF; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; min-height: 50vh'">
+            <v-card-title primary class="title">Characterization Results</v-card-title>
+            <v-card-text>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel iusto sint adipisci beatae, repellat eligendi soluta
+              voluptas maiores dolorem officiis repudiandae eveniet mollitia nisi ut deleniti harum dolores dolore quae.
+            </v-card-text>
               <v-container>
-              <v-card-actions> 
-                  <v-textarea rows="1" label="Characterization Results" outlined></v-textarea>
+              <v-card-actions :style="'display-content: center;'"> 
+                <v-card 
+                  v-if="done==false" 
+                  width="100%" 
+                  style="margin:0 auto" 
+                  height="81vh"
+                  class="pa-2" 
+                  :style="'box-shadow: none; border: 1px dashed grey;'" 
+                >
+                <!-- flex-direction: column; display: flex !important; -->
+                <!-- flex-grow: 1; overflow: auto; -->
+                  <center v-if="loading">
+                    <v-progress-circular
+                      indeterminate
+                      color="#34AAE2"
+                    >
+                    </v-progress-circular>
+                    <span class="ml-4">
+                      Please wait a moment
+                    </span>
+                  </center>
+                </v-card>
+                <v-card v-if="done"
+                  width="100%" 
+                  style="margin:0 auto" 
+                  class="pa-2"
+                  height="81vh" 
+                  :style="'box-shadow: none; border: 1px dashed grey; flex-direction: column; display: flex !important;'">
+                  <v-card-text :style="'flex-grow: 1; overflow: auto;'">
+                  <div ref="testHtml">
+                    <div class="text-center">Karakterisasi Putusan Hakim <br> <span v-if="nomorPutusan != ''" class="red--text">{{ nomorPutusan }}</span> </div>
+                    <br>
+                    <div>
+                      <div v-if="perbuatanTerdakwa != ''">
+                        Kaidah Yurisprudensi: <br>
+                        <span class="red--text">{{ perbuatanTerdakwa }}</span>. <br><br>
+                      </div>
+                      Anotasi Oleh: <br>
+                      <!-- <div class="text-center">
+                        <span class="red--text">{{ 'JUDUL' }}</span>
+                        <br><br>
+                      </div> -->
+                      <div v-if="primair != '' || subsidiair != '' || subsidair != ''">
+                        <div v-if="primair != ''">
+                          <span class="red--text">{{ primair }}</span>;
+                        </div>
+                        <div v-if="subsidiair != ''">
+                          <br>
+                          <span class="red--text">{{ subsidiair }}</span>
+                        </div>
+                        <div v-if="subsidair != ''">
+                          <br>
+                          <span class="red--text">{{ subsidair }}</span>
+                        </div>
+                        <br>
+                      </div>
+                      <div v-if="pertimbanganDakwaan != ''">
+                        Majelis Hakim Kasasi memberikan pertimbangan hukum untuk terdakwa.
+                        <br>
+                        Dalam pertimbangannya, 
+                        <span class="red--text">{{ pertimbanganDakwaan }}</span>
+                        <br><br>
+                      </div>
+                      <div v-if="yurisprudensi != ''">
+                        <span class="red--text">{{ yurisprudensi }}</span>.
+                        <br><br>
+                      </div>
+                        <!-- <span class="red--text">{{ 'FAKTA PERSIDANGAN' }}</span>
+                        <br><br>
+                        Selain itu, majelis hakim juga menyatakan dalam pertimbangannya bahwa <span class="red--text">{{ 'judex facti' }}</span>
+                        <br><br> -->
+                      <div v-if="faktorPemberat != '' || faktorPeringan != ''">
+                        <table style="width:100%">
+                          <tr>
+                            <th v-if="faktorPemberat != ''">Faktor Pemberat</th>
+                            <th v-if="faktorPeringan != ''">Faktor Peringan</th>
+                          </tr>
+                          <tr>
+                            <td v-if="faktorPemberat != ''"><span class="red--text">{{ faktorPemberat }}</span></td>
+                            <td v-if="faktorPeringan != ''"><span class="red--text">{{ faktorPeringan }}</span></td>
+                          </tr>
+                        </table>
+                        <br>
+                      </div>
+                      <div v-if="pasalKasasi != ''">
+                        Menimbang bahwa karena Terdakwa dipidana, maka dibebani untuk membayar biaya perkara pada tingkat kasasi.
+                        <span class="red--text">{{ pasalKasasi }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </v-card-text>
+                </v-card>
               </v-card-actions> 
+              <v-card-actions>
+                <v-spacer/>
+                <v-btn 
+                  outlined 
+                  color="#0A2A62" 
+                  @click="download()" 
+                  v-if="done==true" 
+                  class="mr-5 my-5 py-5 px-10"
+                  :style="'font-size: 12px; width: 130px'"
+                >
+                  Download 
+                  <v-icon
+                    class="ml-2"
+                    :style="'font-size: 14px'"
+                  >
+                    mdi-download
+                  </v-icon>
+                </v-btn>
+              </v-card-actions>
             </v-container>
           </v-card>
         </v-flex>
       </v-layout>
     
-    <center>
-      <v-btn color="#0A2A62" @click="dataPutusan()" class="mx-2 white--text">
-        Execute <v-icon class="ml-2">mdi-send-outline</v-icon>
-      </v-btn>
-      <v-btn outlined color="#0A2A62" @click="download()" v-if="done==true" class="mx-2">
-        Download <v-icon>mdi-download</v-icon>
-      </v-btn>
-    </center>
-    <br>
-    <center v-if="loading">
-      <v-progress-circular
-        indeterminate
-        color="red"
-      ></v-progress-circular>
-      <span class="ml-4">Mohon tunggu sebentar ...</span>
-    </center>
-    
-    
-    <v-card v-if="done" width="53%" style="margin:0 auto" class="pa-2">
-      <div ref="testHtml">
-        <div class="text-center">Karakterisasi Putusan Hakim <br> <span v-if="nomorPutusan != ''" class="red--text">{{ nomorPutusan }}</span> </div>
-        <br>
-        <div>
-          <div v-if="perbuatanTerdakwa != ''">
-            Kaidah Yurisprudensi: <br>
-            <span class="red--text">{{ perbuatanTerdakwa }}</span>. <br><br>
-          </div>
-          Anotasi Oleh: <br>
-          <!-- <div class="text-center">
-            <span class="red--text">{{ 'JUDUL' }}</span>
-            <br><br>
-          </div> -->
-          <div v-if="primair != '' || subsidiair != '' || subsidair != ''">
-            <div v-if="primair != ''">
-              <span class="red--text">{{ primair }}</span>;
-            </div>
-            <div v-if="subsidiair != ''">
-              <br>
-              <span class="red--text">{{ subsidiair }}</span>
-            </div>
-            <div v-if="subsidair != ''">
-              <br>
-              <span class="red--text">{{ subsidair }}</span>
-            </div>
-            <br>
-          </div>
-          <div v-if="pertimbanganDakwaan != ''">
-            Majelis Hakim Kasasi memberikan pertimbangan hukum untuk terdakwa.
-            <br>
-            Dalam pertimbangannya, 
-            <span class="red--text">{{ pertimbanganDakwaan }}</span>
-            <br><br>
-          </div>
-          <div v-if="yurisprudensi != ''">
-            <span class="red--text">{{ yurisprudensi }}</span>.
-            <br><br>
-          </div>
-          <!-- <span class="red--text">{{ 'FAKTA PERSIDANGAN' }}</span>
-          <br><br>
-          Selain itu, majelis hakim juga menyatakan dalam pertimbangannya bahwa <span class="red--text">{{ 'judex facti' }}</span>
-          <br><br> -->
-          <div v-if="faktorPemberat != '' || faktorPeringan != ''">
-            <table style="width:100%">
-              <tr>
-                <th v-if="faktorPemberat != ''">Faktor Pemberat</th>
-                <th v-if="faktorPeringan != ''">Faktor Peringan</th>
-              </tr>
-              <tr>
-                <td v-if="faktorPemberat != ''"><span class="red--text">{{ faktorPemberat }}</span></td>
-                <td v-if="faktorPeringan != ''"><span class="red--text">{{ faktorPeringan }}</span></td>
-              </tr>
-            </table>
-            <br>
-          </div>
-          <div v-if="pasalKasasi != ''">
-            Menimbang bahwa karena Terdakwa dipidana, maka dibebani untuk membayar biaya perkara pada tingkat kasasi.
-            <span class="red--text">{{ pasalKasasi }}</span>
-          </div>
-        </div>
-      </div>
-    </v-card>
     <TesttVue />
   </v-container>
   <footer-section />

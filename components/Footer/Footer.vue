@@ -2,7 +2,7 @@
    
    <v-footer
       padless
-      color="primary"
+      color="#ebebeb"
       dark
       class="footer"
     >
@@ -17,10 +17,11 @@
             :key="link"
             text
             dark
+            color="#5e5e5e"
             >{{ link }}
           </v-btn>
         </v-col>
-        <v-col cols="12">&copy; 2022 Binus</v-col>
+        <v-col cols="12" :style="'color: #5e5e5e'">&copy; 2022 Binus</v-col>
       </v-row>
     </v-footer>
 
