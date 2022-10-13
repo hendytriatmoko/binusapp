@@ -7,6 +7,9 @@
             minima ab rem voluptatum voluptates placeat commodi inventore temporibus nesciunt quo impedit cupiditate 
             error sint labore fuga?</p>
         </v-col>
+        <v-col lg="6">
+          <img class="w-1/4" width="500" src="@/static/images/decoration/analyst1.svg" />
+        </v-col>
         
       </v-row>
   

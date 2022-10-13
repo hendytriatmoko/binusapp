@@ -3,7 +3,8 @@
   <v-container grid-list-md>
     <app-bar />
     <first-section />
-      <v-layout row wrap>
+    <second-section />
+      <v-layout row wrap :style="'margin-top: 100px'">
         <v-flex d-flex xs12 sm6 md6>
           <v-layout row wrap>
             <v-flex>
@@ -91,7 +92,7 @@
                   style="margin:0 auto" 
                   height="81vh"
                   class="pa-2" 
-                  :style="'box-shadow: none; border: 1px dashed grey;'" 
+                  :style="'box-shadow: none; border: 1px dashed #D8D9CF;'" 
                 >
                 <!-- flex-direction: column; display: flex !important; -->
                 <!-- flex-grow: 1; overflow: auto; -->
@@ -111,7 +112,7 @@
                   style="margin:0 auto" 
                   class="pa-2"
                   height="81vh" 
-                  :style="'box-shadow: none; border: 1px dashed grey; flex-direction: column; display: flex !important;'">
+                  :style="'box-shadow: none; border: 1px dashed #D8D9CF; flex-direction: column; display: flex !important;'">
                   <v-card-text :style="'flex-grow: 1; overflow: auto;'">
                   <div ref="testHtml">
                     <div class="text-center">Karakterisasi Putusan Hakim <br> <span v-if="nomorPutusan != ''" class="red--text">{{ nomorPutusan }}</span> </div>
@@ -200,7 +201,6 @@
           </v-card>
         </v-flex>
       </v-layout>
-    
     <TesttVue />
   </v-container>
   <footer-section />
@@ -211,6 +211,7 @@
 import { jsPDF } from "jspdf";
 import { mapActions } from 'vuex'
 import FirstSectionVue from "~/components/FirstSection/FirstSection.vue";
+import SecondSection from "~/components/SecondSection/SecondSection.vue";
 import Footer from "~/components/Footer/Footer.vue";
 import TesttVue from "~/components/Testt/Testt.vue";
 // import extractText from 'office-text-extractor'
@@ -220,6 +221,7 @@ export default {
     AppBar: () =>
       import(/* webpackChunkName: "app-bar" */ '@/components/AppBar.vue'),
       'first-section': FirstSectionVue,
+      'second-section': SecondSection,
       'footer-section' : Footer,
       TesttVue
   },
