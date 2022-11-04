@@ -15,7 +15,7 @@
                   {{ platformName }}
                 </h3>
                 <v-flex>
-                  <v-img :alt="platformName" class="ml-3" contain height="48px" position="center right" src="@/static/logo.svg"></v-img>
+                  <v-img style="border:1px solid red" :alt="platformName" width="200" class="ml-3" contain position="center right" src="/logo.svg"></v-img>
                 </v-flex>
               </v-layout>
             </v-card-title>
