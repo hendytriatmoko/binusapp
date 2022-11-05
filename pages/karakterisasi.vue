@@ -8,15 +8,15 @@
         <br>
         <div>
             <div class="d-flex">
-                <!-- <v-file-input
+                <v-file-input
                     show-size
                     outlined
                     v-model="file"
                     hide-details
                     dense
                     label="File input"
-                ></v-file-input> -->
-                <v-btn class="ml-3" @click="readInput()">
+                ></v-file-input>
+                <v-btn class="ml-3 white--text" color="#0A2A62" @click="readInput()">
                     READ
                     <v-icon>mdi-file-move-outline</v-icon>
                 </v-btn>
@@ -36,22 +36,14 @@
             </div>
         </div>
     </div>
-    <v-btn @click="startMethod()">poses</v-btn>
-    <div class="ma-6">
-        <h2>Result</h2>
+    <center>
+        <v-btn @click="startMethod()" color="#0A2A62" class="white--text">Execute <v-icon class="ml-2">mdi-send-outline</v-icon></v-btn>
+    </center>
+    <div class="ma-6" v-if="done">
         <v-card class="mt-3">
             <v-row class="mx-1">
                 <v-col cols="12" md="8" sm="8">
                     <v-card class="pa-2">
-                        <div>nomor : {{nomorPutusan}}</div>
-                        <div>tanggal : {{tanggalPutusan}}</div>
-                        <div>nama : {{namaTerdakwa}}</div>
-                        <div>usia : {{umurTerdakwa}}</div>
-                        <div>gender : {{genderTerdakwa}}</div>
-                        <div>pekerjaan : {{pekerjaanTerdakwa}}</div>
-                        <div>pemohon Kasasi : {{pemohonKasasi}}</div>
-
-                        <br><br>
                         <center>
                             Karakterisasi Putusan Hakim <br>
                             {{ nomorPutusan }}
@@ -63,10 +55,10 @@
                         </div>
                         <br>
                         <b>Dakwaan</b>
-                        <div>
+                        <div v-if="primair != ''">
                             PRIMAIR : {{ primair }}
                         </div>
-                        <div>
+                        <div v-if="subsidair != ''">
                             SUBSIDAIR : {{ subsidair }}
                         </div>
                         <br>
@@ -95,6 +87,16 @@
                             </table>
                             <br>
                         </div>
+
+                        <br>
+                        <h3>Resume :</h3>
+                        <div>nomor : {{nomorPutusan}}</div>
+                        <div>tanggal : {{tanggalPutusan}}</div>
+                        <div>nama : {{namaTerdakwa}}</div>
+                        <div>usia : {{umurTerdakwa}}</div>
+                        <div>gender : {{genderTerdakwa}}</div>
+                        <div>pekerjaan : {{pekerjaanTerdakwa}}</div>
+                        <div>pemohon Kasasi : {{pemohonKasasi != '' ? pemohonKasasi : '-'}}</div>
                     </v-card>
                 </v-col>
                 <v-col cols="12" md="4" sm="4">
@@ -102,26 +104,47 @@
                         <v-col cols="12" md="6" sm="6">
                             <v-card class="pa-2">
                                 <center>
-                                    Putusan <br> {{ textFile.length }} <br> karakter
+                                    Putusan <br> <h3>{{ textFile.length }}</h3> karakter
                                 </center>
                             </v-card>
                         </v-col>
                         <v-col cols="12" md="6" sm="6">
                             <v-card class="pa-2">
                                 <center>
-                                    Karakterisasi <br> {{ count }} <br> word
+                                    Karakterisasi <br> <h3>{{ count }}</h3> word
                                 </center>
                             </v-card>
                         </v-col>
                         <v-col cols="12" md="12" sm="12">
                             <v-card class="pa-2">
-                                chart
+                                <center>
+                                    <h3>Efektivitas</h3>
+                                    <round-slider
+                                    class="mx-2 mt-3"
+                                    v-model="efektivitas"
+                                    value="50"
+                                    start-angle="315"
+                                    end-angle="+270"
+                                    line-cap="round"
+                                    read-only="true"
+                                    radius="40"
+                                    :tooltip-format="tooltipVal2"
+                                    width="10"
+                                    rangeColor="#305F72"
+                                    />
+                                </center>
                             </v-card>
                         </v-col>
                         <v-col cols="12" md="12" sm="12">
-                            <v-card class="pa-2">
-                                chart
-                            </v-card>
+                            <!-- <v-card class="pa-2"> -->
+                                <!-- <h3>Time Result : 0,8 Second</h3>
+                                <div>
+                                    milisecond: {{ milliseconds }} <br>
+                                    second: {{ seconds }} <br>
+                                    minutes: {{ minutes }} <br>
+                                    hours: {{ hours }} <br>
+                                </div> -->
+                            <!-- </v-card> -->
                         </v-col>
                     </v-row>
                 </v-col>
@@ -399,9 +422,17 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
     dimohonkanOleh:'',
     kerugianNegara:'',
     faktorPemberat:'',
-    faktorPeringan:'',
-    
+    faktorPeringan:'',    
     count:0,
+
+    efektivitas:0,
+    milliseconds:0,
+    seconds:0,
+    minutes:0,
+    hours:0,
+    getStopwatch:'',
+    stopwatch:false,
+    done:false,
   }),
   methods: {
     readInput(){
@@ -410,6 +441,9 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
       reader.onload = e => this.textFile = e.target.result
       reader.readAsText(file)
     console.log('jalan', this.textFile)
+    },
+    tooltipVal2(args) {
+      return args.value + "%";
     },
 
     // data
@@ -454,10 +488,12 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
     },
     getPemohonKasasi(){
         var pemohon = this.cutTextLower('membaca memori','sebagai pemohon kasasi')
-        if (pemohon[0].includes('penuntut umum')) {
-            this.pemohonKasasi = 'Jaksa Penuntut Umum (JPU)'
-        }else{
-            this.pemohonKasasi = 'Terdakwa'
+        if (pemohon != null) {
+            if (pemohon[0].includes('penuntut umum')) {
+                this.pemohonKasasi = 'Jaksa Penuntut Umum (JPU)'
+            }else{
+                this.pemohonKasasi = 'Terdakwa'
+            }            
         }
         // console.log('pemohon', pemohon[0])
     },
@@ -529,8 +565,33 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
         return text
     },
 
+    getTimer(){
+        this.milliseconds+=10;
+
+        if(this.milliseconds == 1000 && this.stopwatch == true){
+            this.milliseconds = 0;
+            this.seconds++;
+
+            if(this.seconds == 60){
+                this.seconds = 0;
+                this.minutes++;
+
+                if(this.minutes == 60){
+                    this.minutes = 0;
+                    this.hours++;
+                }
+            }
+        }
+    },
+    getEfektivitas(){
+        var efektivitas = (this.count/this.textFile.length)*100
+        this.efektivitas = 100 - efektivitas.toFixed(2)
+        console.log('ef', this.efektivitas)
+    },
+
     // start
     startMethod(){
+        this.stopwatch = true
         this.getNoPutusan()
         this.getTanggalPutusan()
         this.getNamaTerdakwa()
@@ -545,12 +606,19 @@ Hal. 17 dari 17 hal. Putusan Nomor 57 K/Pid.Sus/2018`,
         this.getKerugianNegara()
         this.getFaktorPemberat()
         this.getFaktorPeringan()
+        this.getEfektivitas()
+        this.done = true
     }
   },
   created(){
     // this.getUser()
     // this.cutTextLower('nomor','demi')
-    this.startMethod()
   },
 }
 </script>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>

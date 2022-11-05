@@ -23,13 +23,13 @@
             <v-divider></v-divider>
 
             <v-card-text>
-              <p>Sign in with your username and password:</p>
+              <p>Sign in with your email and password:</p>
               <v-form>
                 <v-text-field
                   outline
-                  label="Username"
+                  label="Email"
                   type="text"
-                  v-model="username">
+                  v-model="email">
                 </v-text-field>
 
                 <v-text-field
@@ -48,13 +48,13 @@
             <v-divider></v-divider>
 
             <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
-              <v-btn color="info" flat>
+              <!-- <v-btn color="info" flat>
                 Forgot password?
-              </v-btn>
+              </v-btn> -->
 
               <v-spacer></v-spacer>
               
-              <v-btn color="info" :large="$vuetify.breakpoint.smAndUp">
+              <v-btn small color="info" @click="login()">
                 <v-icon left>mdi-lock</v-icon>
                 Login
               </v-btn>
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Login',
   components: {
@@ -89,9 +89,32 @@ export default {
     listUser:[],
     email:'',
     password:'',
+    emailValid:'admin@gmail.com',
+    passwordValid:'12345678',
     value:true,
   }),
   methods: {
+      ...mapActions({
+      setAlert: 'alert/set',
+      setAuth: 'auth/set',
+    }),
+    login(){
+      if (this.email == 'admin@gmail.com' && this.password == '12345678') {
+        this.$cookies.set('email', this.email)
+        this.setAlert({
+          status: true,
+          color: 'success',
+          text: 'selamat datang '+this.email,
+        })
+        this.$router.push('/')
+      }else{
+        this.setAlert({
+          status: true,
+          color: 'error',
+          text: 'email dan password salah',
+        })
+      }
+    }
   },
   created(){
     // this.getUser()
