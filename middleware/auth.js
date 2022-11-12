@@ -1,10 +1,10 @@
 export default function ({ app, route, redirect }) {
   if (route.path == '/login') {
-    if (app.$cookies.get('email') != null) {
+    if (app.$cookies.get('user') != null) {
       return redirect('/')
     }
   }else{
-    if (app.$cookies.get('email') == null) {
+    if (app.$cookies.get('user') == null) {
       return redirect('/login')
     }
   }

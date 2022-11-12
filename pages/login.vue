@@ -89,8 +89,6 @@ export default {
     listUser:[],
     email:'',
     password:'',
-    emailValid:'admin@gmail.com',
-    passwordValid:'12345678',
     value:true,
   }),
   methods: {
@@ -98,22 +96,34 @@ export default {
       setAlert: 'alert/set',
       setAuth: 'auth/set',
     }),
-    login(){
-      if (this.email == 'admin@gmail.com' && this.password == '12345678') {
-        this.$cookies.set('email', this.email)
-        this.setAlert({
-          status: true,
-          color: 'success',
-          text: 'selamat datang '+this.email,
+    async login(){
+      let formData = new FormData()
+
+      formData.append('email', this.email)
+      formData.append('password', this.password)
+
+      await this.$axios
+        .post('/user/v1/user/signin', formData)
+        .then((response) => {
+          // console.log('result', response.data)
+          let { data } = response.data
+          this.setAuth(data[0])
+          this.$cookies.set('user', JSON.stringify(data[0]))
+          this.setAlert({
+            status: true,
+            color: 'success',
+            text: 'Selamat Datang ' + data[0].nama,
+          })
+          this.$router.push('/')
         })
-        this.$router.push('/')
-      }else{
-        this.setAlert({
-          status: true,
-          color: 'error',
-          text: 'email dan password salah',
+        .catch((error) => {
+          let responses = error.response.data
+          this.setAlert({
+            status: true,
+            color: 'error',
+            text: responses.api_message,
+          })
         })
-      }
     }
   },
   created(){

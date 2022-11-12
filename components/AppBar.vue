@@ -16,7 +16,7 @@
             v-bind="attrs"
             v-on="on"
           >
-            {{ dataUser }}
+            {{ dataUser.nama }}
           </v-btn>
         </template>
         <v-list>
@@ -47,13 +47,13 @@ export default {
       this.$router.push(data)
     },
     logout(){
-      this.$cookies.set('email', null)
+      this.$cookies.set('user', null)
       this.$router.push('/login')
     }
   },
   created(){
-    this.dataUser = this.$cookies.get('email')
-    console.log('user bar', this.dataUser)
+    this.dataUser = this.$cookies.get('user')
+    // console.log('user bar', this.dataUser)
   }
 }
 </script>
