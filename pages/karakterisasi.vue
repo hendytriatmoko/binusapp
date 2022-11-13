@@ -109,9 +109,9 @@
                         </center>
                         
                         <div class="mt-3">Dalam persidangan, bunyi dakwaan yang diberikan kepada terdakwa ialah sebagai berikut:</div>
-                        <div v-if="primair != null" style="text-align:justify"><b>Primair :</b> <span>{{primair != null ? primair : '-'}}</span></div>
-                        <div v-if="subsidair != null" style="text-align:justify"><b>Subsidair :</b> <span>{{subsidair != null ? subsidair : '-'}}</span></div>
-                        <div v-if="lebihSubsidair != null" style="text-align:justify"><b>Lebih Subsidair :</b> <span>{{lebihSubsidair != null ? lebihSubsidair : '-'}}</span></div>
+                        <div style="text-align:justify"><b>Primair :</b> <span>{{primair != null ? primair : '-'}}</span></div>
+                        <div style="text-align:justify"><b>Subsidair :</b> <span>{{subsidair != null ? subsidair : '-'}}</span></div>
+                        <div style="text-align:justify"><b>Lebih Subsidair :</b> <span>{{lebihSubsidair != null ? lebihSubsidair : '-'}}</span></div>
                         <br>
                         <div v-if="tuntuanPidanaNama != null" style="text-align:justify">
                             Kemudian bunyi dari pembacaan tuntutan pidana <span>{{ tuntuanPidanaNama }}</span>
@@ -177,20 +177,30 @@
                             Terdakwa sebagai <span>{{pekerjaanTerdakwa}}</span> memiliki faktor pertimbangan hukum :
                         </div>
                         <center>
-                            <table id="faktor" class="mt-3" v-if="faktorPemberatArray != null || faktorPeringanArray != null">
+                            <table id="faktor" class="mt-3">
                                 <tr id="faktor" valign="top">
-                                    <th id="faktor" v-if="faktorPemberatArray != null" style="width:50%">Faktor yang Memberatkan</th>
-                                    <th id="faktor" v-if="faktorPeringanArray != null" style="width:50%">Faktor yang Meringankan</th>
+                                    <th id="faktor" style="width:50%">Faktor yang Memberatkan</th>
+                                    <th id="faktor" style="width:50%">Faktor yang Meringankan</th>
                                 </tr>
                                 <tr id="faktor" style="text-align:justify" valign="top">
-                                    <td id="faktor" v-if="faktorPemberatArray != null" class="px-2">
-                                        <div v-for="(item,index) in faktorPemberatArray" :key="index">
-                                            <div v-if="index+1 != faktorPemberatArray.length">{{index+1 + '. ' +item}}</div>
+                                    <td id="faktor" class="px-2">
+                                        <div v-if="faktorPemberatArray != null">
+                                            <div v-for="(item,index) in faktorPemberatArray" :key="index">
+                                                <div v-if="index+1 != faktorPemberatArray.length">{{index+1 + '. ' +item}}</div>
+                                            </div>
+                                        </div>
+                                        <div v-else>
+                                            <p> - </p>
                                         </div>
                                     </td>
-                                    <td id="faktor" v-if="faktorPeringanArray != null" class="px-2">
-                                        <div v-for="(item,index) in faktorPeringanArray" :key="index">
-                                            <div v-if="index+1 != faktorPeringanArray.length">{{index+1 + '. ' +item}}</div>
+                                    <td id="faktor" class="px-2">
+                                        <div v-if="faktorPeringanArray != null">
+                                            <div v-for="(item,index) in faktorPeringanArray" :key="index">
+                                                <div v-if="index+1 != faktorPeringanArray.length">{{index+1 + '. ' +item}}</div>
+                                            </div>
+                                        </div>
+                                        <div v-else>
+                                            <p> - </p>
                                         </div>
                                     </td>
                                 </tr>
