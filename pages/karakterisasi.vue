@@ -7,26 +7,37 @@
         </div>
         <br>
         <div>
-            <!-- <div class="d-flex">
-                <v-file-input
-                    show-size
-                    outlined
-                    v-model="file"
-                    hide-details
-                    dense
-                    label="File input"
-                ></v-file-input>
-                <v-btn class="ml-3 white--text" color="#0A2A62" @click="readInput()">
-                    READ
-                    <v-icon>mdi-file-move-outline</v-icon>
-                </v-btn>
+            <div v-if="!$route.query.id">
+                <div class="d-flex">
+                    <v-file-input
+                        show-size
+                        outlined
+                        v-model="file"
+                        hide-details
+                        dense
+                        label="File input"
+                    ></v-file-input>
+                    <v-btn class="ml-3 white--text" color="#0A2A62" @click="getTextLive(), terbaca = false">
+                        READ
+                        <v-icon>mdi-file-move-outline</v-icon>
+                    </v-btn>
+                </div>
+                <br>
             </div>
-            <br> -->
+            <div v-if="terbaca == false" class="d-flex" style="margin:0 auto;width:400px">
+                <v-progress-circular
+                    indeterminate
+                    color="red"
+                    size="30"
+                ></v-progress-circular>
+                <h3 class="ml-3">Mohon tunggu, sedang membaca file ...</h3>
+            </div>
             <div>
                 <v-textarea
                 clearable
                 height="300px"
                 dense
+                v-if="terbaca == true"
                 hide-details
                 v-model="textFile"
                 background-color="amber lighten-4"
@@ -36,7 +47,7 @@
             </div>
         </div>
     </div>
-    <center>
+    <center v-if="terbaca == true">
         <v-btn @click="startMethod()" color="#0A2A62" class="white--text">Execute <v-icon class="ml-2">mdi-send-outline</v-icon></v-btn>
     </center>
     <div class="ma-6" v-if="done">
@@ -368,6 +379,7 @@ export default {
     getStopwatch:'',
     stopwatch:false,
     done:false,
+    terbaca:null,
 
     dataFile:[]
   }),
@@ -637,7 +649,6 @@ export default {
     },
 
 
-
     getPemohonKasasi(){
         var pemohon = this.cutTextLower('membaca memori','sebagai pemohon kasasi')
         if (pemohon != null) {
@@ -727,7 +738,7 @@ export default {
         });
     },
     downloadPdf(){
-        var doc = new jsPDF('p', 'px', [700,900]);
+        var doc = new jsPDF('p', 'px', [990,1100]);
         let margins = {
                 top: 80,
                 bottom: 60,
@@ -741,7 +752,7 @@ export default {
         var nama = 'karakterisasi.pdf'
         // doc.save('test.pdf');
         doc.html(this.$refs.testHtml, {
-            margin:[20,20,20,20],
+            margin:[40,40,40,40],
             callback: function(doc) {
                 doc.save(nama);
             },
@@ -818,6 +829,30 @@ export default {
         .then((response) => {
           let { data } = response.data
           this.textFile = data.text
+          this.terbaca = true
+        //   console.log('tambah file', data)
+          
+        })
+        .catch((error) => {
+          let responses = error.response.data
+          this.setAlert({
+            status: true,
+            color: 'error',
+            text: responses.api_message,
+          })
+        })
+    },
+    async getTextLive(){
+      let formData = new FormData()
+
+      formData.append('file', this.file)
+
+      await this.$axios
+        .post('/user/v1/file/gettextlive', formData)
+        .then((response) => {
+          let { data } = response.data
+          this.textFile = data.text
+          this.terbaca = true
         //   console.log('tambah file', data)
           
         })
@@ -848,6 +883,7 @@ export default {
     console.log('route', this.$route.query.id)
     if (this.$route.query.id) {
         console.log('ada id nya')
+        this.terbaca = false
         this.getFile(this.$route.query.id)
     }else{
         console.log('tidak ada id nya')

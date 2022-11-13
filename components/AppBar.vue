@@ -16,6 +16,7 @@
             v-bind="attrs"
             v-on="on"
           >
+            <v-icon small class="mr-1">mdi-account</v-icon>
             {{ dataUser.nama }}
           </v-btn>
         </template>
@@ -23,11 +24,13 @@
           <v-list-item
             to="/account/profile/data-diri"
           >
+            <v-icon small class="mr-1">mdi-account</v-icon>
             Profile
           </v-list-item>
           <v-list-item
             @click="logout()"
           >
+            <v-icon small class="mr-1">mdi-logout</v-icon>
             Logout
           </v-list-item>
         </v-list>
