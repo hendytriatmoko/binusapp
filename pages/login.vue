@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-layout wrap>
-        <v-flex sm12 md6 offset-md3>
+        <v-flex sm12 md4 offset-md4>
           <v-card 
             elevation="4" 
             light tag="section" 
@@ -15,7 +15,7 @@
                   {{ platformName }}
                 </h3>
                 <v-flex>
-                  <v-img style="margin: 10px;" :alt="platformName" width="200" class="ml-3" contain position="center right" src="/binuslogo.png"></v-img>
+                  <v-img style="margin: 20px;" :alt="platformName" width="150" class="mx-auto" contain position="center right" src="/binuslogo.png"></v-img>
                 </v-flex>
               </v-layout>
             </v-card-title>
