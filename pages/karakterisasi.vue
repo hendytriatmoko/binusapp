@@ -805,9 +805,9 @@ export default {
     },
     async clearSpam(){
         this.wordOfPutusan = this.textFile.split(' ')
-        var dataSpam = this.cutText('Hal.','putusan.mahkamahagung.go.id')
+        var dataSpam = this.cutText('Hal','putusan.mahkamahagung.go.id')
         for (let i = 0; i < dataSpam.length; i++) {
-            dataSpam[i] = 'Hal.'+dataSpam[i]+'putusan.mahkamahagung.go.id'
+            dataSpam[i] = 'Hal'+dataSpam[i]+'putusan.mahkamahagung.go.id'
         }
         for (let j = 0; j < dataSpam.length; j++) {
             this.textFile = this.textFile.replace(dataSpam[j],'')
