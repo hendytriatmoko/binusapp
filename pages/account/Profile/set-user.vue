@@ -288,7 +288,7 @@ export default {
 
       formData.set('nama', this.formNama)
       formData.set('no_telp', this.formNo)
-      formData.set('email', this.formEmail)
+      formData.set('email', this.formEmail.toLowerCase())
       formData.set('password', this.formPassword)
 
       await this.$axios
