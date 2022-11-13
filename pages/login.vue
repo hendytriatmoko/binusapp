@@ -38,6 +38,7 @@
                   label="Password"
                   :append-icon="value ? 'mdi-eye-off' : 'mdi-eye'" 
                   @click:append="() => (value = !value)"
+                  @keyup.enter="login()"
                   :type="value ? 'password' : 'text'"
                   v-model="password"
                  >
@@ -99,7 +100,7 @@ export default {
     async login(){
       let formData = new FormData()
 
-      formData.append('email', this.email)
+      formData.append('email', this.email.toLowerCase())
       formData.append('password', this.password)
 
       await this.$axios

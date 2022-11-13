@@ -207,7 +207,7 @@
                                     <br>
                                     <h5>MENGADILI SENDIRI</h5>
                                 </center>
-                                <div v-if="index+1 != amarMengadiliArray.length">{{item}}</div>
+                                <div v-if="index+1 != amarMengadiliArray.length">{{ item == '' ? item : '-'+item}}</div>
                             </div>
                         </div>
                         <br>
@@ -273,7 +273,7 @@
                                     <br>
                                     <h5>MENGADILI SENDIRI</h5>
                                 </center>
-                                <div v-if="index+1 != amarMengadiliArray.length"><i>"......{{item}}......"</i></div>
+                                <div v-if="index+1 != amarMengadiliArray.length"><i>{{ item == '' ? item : '"......'+item+'......"'}}</i></div>
                             </div>
                         </div>
                     </v-card>
