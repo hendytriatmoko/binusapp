@@ -6,7 +6,7 @@
           <v-card 
             elevation="4" 
             light tag="section" 
-            style="margin: 23vh auto !important; border: none !important; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;"
+            style="margin: 15vh auto !important; border: none !important; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;"
           >
 
             <v-card-title>
@@ -15,7 +15,7 @@
                   {{ platformName }}
                 </h3>
                 <v-flex>
-                  <v-img style="border:1px solid red" :alt="platformName" width="200" class="ml-3" contain position="center right" src="/logo.svg"></v-img>
+                  <v-img style="margin: 10px;" :alt="platformName" width="200" class="ml-3" contain position="center right" src="/binuslogo.png"></v-img>
                 </v-flex>
               </v-layout>
             </v-card-title>
@@ -69,7 +69,7 @@
               |
               <a href="#">Terms of Service</a>
             </p>
-            <p class="caption my-3">Powered by <a href="#">StaffCircle</a></p>
+            <p class="caption my-3">Powered by <a href="#">Binus University</a></p>
           </v-layout>
         </v-flex>
       </v-layout>

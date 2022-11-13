@@ -49,22 +49,22 @@
                             <v-spacer />
                             <h6>Tanggal Putusan : {{tanggalPutusan != null ? tanggalPutusan : '-'}}</h6>
                         </v-card-title>
-                        <center>
-                            <h4>Karakterisasi Putusan Hakim</h4>
+                        <center style="margin-top: 30px;margin-bottom: 30px;">
+                            <h2>Karakterisasi Putusan Hakim</h2>
                             <h4>Nomor Putusan: {{nomorPutusan != null ? nomorPutusan : '-'}}</h4>
                         </center>
                         <br>
                         <h5>Anotasi Oleh</h5>
-                        <center>
+                        <!-- <center>
                             <h4>Karakterisasi Putusan Hakim</h4>
-                        </center>
+                        </center> -->
                         <br>
-                        <h5>Pembuka</h5>
+                        <!-- <h5>Pembuka</h5> -->
                         <div>
-                            {{ 
+                            <p>{{ 
                                 'Pemeriksaan perkara tindak pidana korupsi dalam persidangan dimohonkan oleh '
                                 + dimohonkanOleh
-                            }}
+                            }}</p>
                         </div>
                         <br>
                         <center>
@@ -168,8 +168,8 @@
                         <center>
                             <table id="faktor" class="mt-3" v-if="faktorPemberatArray != null || faktorPeringanArray != null">
                                 <tr id="faktor" valign="top">
-                                    <th id="faktor" v-if="faktorPemberatArray != null" style="width:50%">Faktor Pemberat</th>
-                                    <th id="faktor" v-if="faktorPeringanArray != null" style="width:50%">Faktor Peringan</th>
+                                    <th id="faktor" v-if="faktorPemberatArray != null" style="width:50%">Faktor yang Memberatkan</th>
+                                    <th id="faktor" v-if="faktorPeringanArray != null" style="width:50%">Faktor yang Meringankan</th>
                                 </tr>
                                 <tr id="faktor" style="text-align:justify" valign="top">
                                     <td id="faktor" v-if="faktorPemberatArray != null" class="px-2">
@@ -259,14 +259,14 @@
                         <v-col cols="12" md="6" sm="6">
                             <v-card class="pa-2">
                                 <center>
-                                    Putusan <br> <h3>{{ wordOfPutusan.length }}</h3> words
+                                    Putusan <br> <h3>{{ wordOfPutusan.length }}</h3> Kata
                                 </center>
                             </v-card>
                         </v-col>
                         <v-col cols="12" md="6" sm="6">
                             <v-card class="pa-2">
                                 <center>
-                                    Karakterisasi <br> <h3>{{ wordOfKarakterisasi+200 }}</h3> words
+                                    Karakterisasi <br> <h3>{{ wordOfKarakterisasi+200 }}</h3> Kata
                                 </center>
                             </v-card>
                         </v-col>
@@ -306,6 +306,7 @@
 
 <script>
 import { jsPDF } from "jspdf";
+import { ref } from 'vue';
 export default {
   name: 'karakterisasi',
   components: {
@@ -700,7 +701,9 @@ export default {
         console.log('ef', this.efektivitas)
     },
     downloadPdf(){
-        var doc = new jsPDF('p', 'px', [700,900]);
+        var doc = new jsPDF('p', 'mm', [297, 210], 'a4');
+        doc.setFontSize(5);
+     
         let margins = {
                 top: 80,
                 bottom: 60,
@@ -715,6 +718,7 @@ export default {
         // doc.save('test.pdf');
         doc.html(this.$refs.testHtml, {
             margin:[20,20,20,20],
+            
             callback: function(doc) {
                 doc.save(nama);
             },

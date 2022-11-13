@@ -133,10 +133,10 @@
                             <template v-slot:[`item.action`]="{ item }">
                               <div class="ma-1">
                                 <v-btn @click="direktoriFile = item.file,namaHapusFile = item.nama_file,idHapusFile = item.id_file,dialogHapus = true" color="red lighten-1" small>
-                                    <v-icon small>mdi-delete</v-icon>
+                                    <v-icon small>mdi-delete</v-icon> Delete
                                 </v-btn>
                                 <v-btn color="#FCC35B" @click="goKarakterisasi(item.id_file)" small>
-                                    <v-icon small>mdi-send</v-icon>
+                                    <v-icon small>mdi-send</v-icon> Excecute
                                 </v-btn>
                               </div>
                             </template>
