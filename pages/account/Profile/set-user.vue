@@ -229,7 +229,7 @@ export default {
       formData.set('id_user', this.pickUser.id_user)
       formData.set('nama', this.pickUser.nama)
       formData.set('no_telp', this.pickUser.no_telp)
-      formData.set('email', this.pickUser.email)
+      formData.set('email', this.pickUser.email.toLowerCase())
 
       await this.$axios
         .put('/user/v1/user/update', formData)
