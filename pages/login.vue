@@ -38,6 +38,7 @@
                   label="Password"
                   :append-icon="value ? 'mdi-eye-off' : 'mdi-eye'" 
                   @click:append="() => (value = !value)"
+                  @keyup.enter="login()"
                   :type="value ? 'password' : 'text'"
                   v-model="password"
                  >
