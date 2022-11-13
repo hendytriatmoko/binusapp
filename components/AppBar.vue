@@ -21,7 +21,7 @@
         </template>
         <v-list>
           <v-list-item
-            to="/account/profile"
+            to="/account/profile/data-diri"
           >
             Profile
           </v-list-item>
