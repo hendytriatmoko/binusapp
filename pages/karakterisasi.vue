@@ -217,6 +217,67 @@
                         </div>
                     </v-card>
                     <br>
+                    <v-card id="resumePdf" class="px-4 py-5">
+                        <center style="margin-top: 30px;margin-bottom: 30px;">
+                            <h2>Resume</h2> 
+                        </center>
+
+                        <center>
+                            <table>
+                                <tr valign="top">
+                                    <td style="width:150px">Nama</td>
+                                    <td style="width:30px">:</td>
+                                    <td style="width:300px">{{ namaTerdakwa != null ? namaTerdakwa : '-'}}</td>
+                                </tr>
+                                <tr valign="top">
+                                    <td>Pekerjaan</td>
+                                    <td>:</td>
+                                    <td>{{ pekerjaanTerdakwa != null ? pekerjaanTerdakwa : '-'}}</td>
+                                </tr>
+                            </table>
+                        </center>
+                        <div class="my-5">
+                            <div class="my-5">
+                                <h4><b>Primair</b></h4>
+                                <div v-if="primair != null" style="text-align:justify"><i>"......</i> <i>{{primair != null ? primair : '-'}}</i><i>......"</i></div>
+                            </div>
+                            <div class="my-5">
+                                <h4><b>Subsidair</b></h4>
+                                <div v-if="subsidair != null" style="text-align:justify"><i>"......</i>  <i>{{subsidair != null ? subsidair : '-'}}</i><i>......"</i></div>
+                            </div>
+                        </div>
+                        <div class="my-5">
+                            <h4><b>Permohonan Kasasi</b></h4>
+                            <div v-if="akta != null" style="text-align:justify">
+                                <div v-for="(item,index) in akta" :key="index">
+                                    <div><i>"......</i><i>{{index+1 + '. ' +item}}</i><i>......"</i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-5">
+                            <h4><b>Amar Putusan Pengadilan Negeri</b></h4>
+                            <div v-for="(item,index) in amarPNArray" :key="index">
+                                <div v-if="index+1 != amarPNArray.length"><i>"......{{ index+1 + '. ' +item }}......"</i></div>
+                            </div>
+                        </div>
+                        <div class="my-5">
+                            <h4><b>Amar Putusan Pengadilan Tinggi</b></h4>
+                            <div v-for="(item,index) in amarPTArray" :key="index">
+                                <div v-if="index+1 != amarPTArray.length"><i>"......{{ index+1 + '. ' +item }}......"</i></div>
+                            </div>
+                        </div>
+                        <div class="my-5">
+                            <h4><b>Amar Putusan Mahkamah Agung</b></h4>
+                            <div v-for="(item,index) in amarMengadiliArray" :key="index">
+                                <center v-if="item.includes('mengadili sendiri')">
+                                    <br>
+                                    <h5>MENGADILI SENDIRI</h5>
+                                </center>
+                                <div v-if="index+1 != amarMengadiliArray.length"><i>"......{{item}}......"</i></div>
+                            </div>
+                        </div>
+                    </v-card>
+                    <br>
                     <!-- <v-card class="pa-2">
                         <h3>Resume :</h3>
                         <div>nomor : {{nomorPutusan}}</div>
@@ -308,72 +369,6 @@
                             </v-btn>
                         </v-col>
                     </v-row>
-                </v-col>
-            </v-row>
-        </v-card>
-        <v-card class="mt-3">
-            <v-row class="mx-1 py-5">
-                <v-col cols="12" md="8" sm="8">
-                    <v-card id="resumePdf" class="px-4 py-5">
-                        <center style="margin-top: 30px;margin-bottom: 30px;">
-                            <h2>Resume</h2> 
-                        </center>
-
-                        <center>
-                            <table>
-                                <tr valign="top">
-                                    <td style="width:150px">Nama</td>
-                                    <td style="width:30px">:</td>
-                                    <td style="width:300px">{{ namaTerdakwa != null ? namaTerdakwa : '-'}}</td>
-                                </tr>
-                                <tr valign="top">
-                                    <td>Pekerjaan</td>
-                                    <td>:</td>
-                                    <td>{{ pekerjaanTerdakwa != null ? pekerjaanTerdakwa : '-'}}</td>
-                                </tr>
-                            </table>
-                        </center>
-                        <div class="my-5">
-                            <div class="my-5">
-                                <h4><b>Primair</b></h4>
-                                <div v-if="primair != null" style="text-align:justify"><i>"......</i> <i>{{primair != null ? primair : '-'}}</i><i>......"</i></div>
-                            </div>
-                            <div class="my-5">
-                                <h4><b>Subsidair</b></h4>
-                                <div v-if="subsidair != null" style="text-align:justify"><i>"......</i>  <i>{{subsidair != null ? subsidair : '-'}}</i><i>......"</i></div>
-                            </div>
-                        </div>
-                        <div class="my-5">
-                            <h4><b>Permohonan Kasasi</b></h4>
-                            <div v-if="akta != null" style="text-align:justify">
-                                <div v-for="(item,index) in akta" :key="index">
-                                    <div><i>"......</i><i>{{index+1 + '. ' +item}}</i><i>......"</i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="my-5">
-                            <h4><b>Amar Putusan Pengadilan Negeri</b></h4>
-                            <div v-for="(item,index) in amarPNArray" :key="index">
-                                <div v-if="index+1 != amarPNArray.length"><i>"......{{ index+1 + '. ' +item }}......"</i></div>
-                            </div>
-                        </div>
-                        <div class="my-5">
-                            <h4><b>Amar Putusan Pengadilan Tinggi</b></h4>
-                            <div v-for="(item,index) in amarPTArray" :key="index">
-                                <div v-if="index+1 != amarPTArray.length"><i>"......{{ index+1 + '. ' +item }}......"</i></div>
-                            </div>
-                        </div>
-                        <div class="my-5">
-                            <h4><b>Amar Putusan Mahkamah Agung</b></h4>
-                            <div v-for="(item,index) in amarMengadiliArray" :key="index">
-                                <center v-if="item.includes('mengadili sendiri')">
-                                    <br>
-                                    <h5>MENGADILI SENDIRI</h5>
-                                </center>
-                                <div v-if="index+1 != amarMengadiliArray.length"><i>"......{{item}}......"</i></div>
-                            </div>
-                        </div>
-                    </v-card>
                 </v-col>
             </v-row>
         </v-card>
