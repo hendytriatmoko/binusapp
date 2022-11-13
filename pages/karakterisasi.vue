@@ -914,6 +914,47 @@ export default {
         })
     },
     async getTextLive(){
+        this.nomorPutusan = null
+        this.tanggalPutusan = null
+        this.namaTerdakwa = null
+        this.umurTerdakwa = null
+        this.genderTerdakwa = null
+        this.pekerjaanTerdakwa = null
+        this.tempatTinggal = null
+        this.pemohonKasasi = null
+        this.dakwaan = null
+        this.primair = null
+        this.subsidair = null
+        this.lebihSubsidair = null
+
+        this.tuntuanPidana = null
+        this.tuntuanPidanaNama = null
+        this.tuntuanPidanaArray = null
+
+        this.amarPN = null
+        this.amarPNNama = null
+        this.amarPNArray = null
+
+        this.amarPT = null
+        this.amarPTNama = null
+        this.amarPTArray = null
+
+        this.akta = null
+
+        this.alasanKasasi = null
+        this.alasanKasasiArray = null
+        this.alasanKasasiArrayNew = null
+
+        this.faktorHukuman = null
+        this.faktorPemberat = null
+        this.faktorPemberatArray = null
+        this.faktorPeringan = null
+        this.faktorPeringanArray = null
+        this.amarMengadili = null
+        this.amarMengadiliArray = null
+        this.akhirPutusan = null
+        this.done = false
+      
       let formData = new FormData()
 
       formData.append('file', this.file)
