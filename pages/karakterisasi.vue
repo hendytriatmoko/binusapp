@@ -700,7 +700,7 @@ export default {
         this.efektivitas = 100 - efektivitas.toFixed(2)
         console.log('ef', this.efektivitas)
     },
-    downloadPdf(){
+    downloadPdfs(){
         var doc = new jsPDF('p', 'mm', [297, 210], 'a4');
         doc.setFontSize(5);
      
@@ -719,6 +719,29 @@ export default {
         doc.html(this.$refs.testHtml, {
             margin:[20,20,20,20],
             
+            callback: function(doc) {
+                doc.save(nama);
+            },
+            x: 10,
+            y: 10,
+        });
+    },
+    downloadPdf(){
+        var doc = new jsPDF('p', 'px', [700,900]);
+        let margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+        
+        // doc.html(this.$refs.testHtml, 40, 80,{
+        //     'width' : 522
+        // });
+        var nama = 'karakterisasi.pdf'
+        // doc.save('test.pdf');
+        doc.html(this.$refs.testHtml, {
+            margin:[20,20,20,20],
             callback: function(doc) {
                 doc.save(nama);
             },
