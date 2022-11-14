@@ -255,6 +255,10 @@
                                 <h4><b>Subsidair</b></h4>
                                 <div style="text-align:justify"><i>"......</i>  <i>{{subsidair != null ? subsidair : '-'}}</i><i>......"</i></div>
                             </div>
+                            <div v-if="lebihSubsidair != null" class="my-5">
+                                <h4><b>Lebih Subsidair</b></h4>
+                                <div style="text-align:justify"><i>"......</i>  <i>{{lebihSubsidair != null ? lebihSubsidair : '-'}}</i><i>......"</i></div>
+                            </div>
                         </div>
                         <div v-if="akta != null" class="my-5">
                             <h4><b>Permohonan Kasasi</b></h4>
@@ -264,18 +268,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="amarPNArray != null" class="my-5">
+                        <!-- <div v-if="amarPNArray != null" class="my-5">
                             <h4><b>Amar Putusan Pengadilan Negeri</b></h4>
                             <div v-for="(item,index) in amarPNArray" :key="index">
                                 <div v-if="index+1 != amarPNArray.length"><i>"......{{ index+1 + '. ' +item }}......"</i></div>
                             </div>
-                        </div>
-                        <div v-if="amarPTArray != null" class="my-5">
+                        </div> -->
+                        <!-- <div v-if="amarPTArray != null" class="my-5">
                             <h4><b>Amar Putusan Pengadilan Tinggi</b></h4>
                             <div v-for="(item,index) in amarPTArray" :key="index">
                                 <div v-if="index+1 != amarPTArray.length"><i>"......{{ index+1 + '. ' +item }}......"</i></div>
                             </div>
-                        </div>
+                        </div> -->
                         <div v-if="amarMengadili != null" class="my-5">
                             <h4><b>Amar Putusan Mahkamah Agung</b></h4>
                             <div v-for="(item,index) in amarMengadiliArray" :key="index">
