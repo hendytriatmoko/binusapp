@@ -24,13 +24,20 @@
           <v-list-item
             to="/account/profile/data-diri"
           >
-            <v-icon small class="mr-1">mdi-account</v-icon>
+            <v-icon class="mr-1">mdi-account</v-icon>
             Profile
+          </v-list-item>
+          <v-list-item
+            v-if="dataUser.role == 'Super Admin' || dataUser.role == 'Admin'"
+            to="/account/profile/set-user"
+          >
+            <v-icon class="mr-1">mdi-account-cog</v-icon>
+            Kelola User
           </v-list-item>
           <v-list-item
             @click="logout()"
           >
-            <v-icon small class="mr-1">mdi-logout</v-icon>
+            <v-icon class="mr-1">mdi-logout</v-icon>
             Logout
           </v-list-item>
         </v-list>

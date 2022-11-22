@@ -13,7 +13,7 @@
               v-model="search"
           >
           </v-text-field>
-          <v-btn color="#0A2A62" @click="dialogTambahUser = true" class="ml-2 white--text">
+          <v-btn v-if="dataUser.role == 'Super Admin'" color="#0A2A62" @click="dialogTambahUser = true" class="ml-2 white--text">
             <v-icon class="mr-1">mdi-plus</v-icon>
             Tambah User
           </v-btn>
@@ -69,6 +69,16 @@
               v-model="formNo"
               dense
           ></v-text-field>
+          <div class="teal--text mt-3">Role</div>
+          <v-autocomplete
+            v-model="pickRole"
+            :items="listRole"
+            item-text="nama"
+            hide-details
+            item-value="nama"
+            dense
+            outlined
+          ></v-autocomplete>
           <div class="teal--text mt-3">Password</div>
           <v-text-field
               outlined
@@ -135,6 +145,17 @@
               hide-details
               dense
           ></v-text-field>
+          <div class="teal--text mt-3">Role</div>
+          <v-autocomplete
+            v-model="pickUser.role"
+            :items="listRole"
+            item-text="nama"
+            :disabled="dataUser.role != 'Super Admin' ? true : false"
+            hide-details
+            item-value="nama"
+            dense
+            outlined
+          ></v-autocomplete>
           <div class="teal--text mt-3">Nomor Telepon</div>
           <v-text-field
               outlined
@@ -169,6 +190,7 @@ export default {
   },
   data: () => ({
     listUser:[],
+    dataUser:'',
     dialogHapus:false,
     dialogEdit:false,
     formNama:'',
@@ -179,6 +201,13 @@ export default {
     formPassword:'',
     value:true,
     dialogTambahUser:false,
+    pickRole:'',
+    listRole:[
+      {id:1,nama:'Super Admin'},
+      {id:2,nama:'Admin'},
+      {id:3,nama:'Super User'},
+      {id:4,nama:'User'},
+    ],
     headers: [
         {
           text: 'Nama',
@@ -188,6 +217,7 @@ export default {
         },
         { text: 'Email', value: 'email' },
         { text: 'No Telepon', value: 'no_telp' },
+        { text: 'Role', value: 'role' },
         { text: 'Action', value: 'action' },
       ],
   }),
@@ -229,6 +259,7 @@ export default {
       formData.set('id_user', this.pickUser.id_user)
       formData.set('nama', this.pickUser.nama)
       formData.set('no_telp', this.pickUser.no_telp)
+      formData.set('role', this.pickUser.role)
       formData.set('email', this.pickUser.email.toLowerCase())
 
       await this.$axios
@@ -290,6 +321,7 @@ export default {
       formData.set('no_telp', this.formNo)
       formData.set('email', this.formEmail.toLowerCase())
       formData.set('password', this.formPassword)
+      formData.set('role', this.pickRole)
 
       await this.$axios
         .post('/user/v1/user/create', formData)
@@ -298,6 +330,7 @@ export default {
           this.formNo = ''
           this.formEmail = ''
           this.formPassword = ''
+          this.pickRole = ''
           this.dialogTambahUser = false
           this.setAlert({
             status: true,
@@ -318,6 +351,8 @@ export default {
   },
   created(){
     // this.getUser()
+    this.dataUser = this.$cookies.get('user')
+    console.log('ini user woy', this.dataUser)
     this.getUser()
   }
 }

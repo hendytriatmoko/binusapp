@@ -39,15 +39,15 @@ export default {
   methods: {
     selectMenu(){
       this.listMenu = []
-      if (this.dataUserId.role != 'admin') {
+      if (this.dataUserId.role == 'Super Admin' || this.dataUserId.role == 'Admin') {
+        for (let i = 0; i < this.listProfil.length; i++) {
+          this.listMenu.push(this.listProfil[i])
+        }
+      }else{
         for (let i = 0; i < this.listProfil.length; i++) {
           if (this.listProfil[i].text != 'Pengaturan User') {
             this.listMenu.push(this.listProfil[i])
           }
-        }
-      }else{
-        for (let i = 0; i < this.listProfil.length; i++) {
-          this.listMenu.push(this.listProfil[i])
         }
       }
       console.log('menu', this.listMenu)

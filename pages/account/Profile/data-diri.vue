@@ -93,6 +93,16 @@
                 ></v-text-field>
             </v-container>
         </v-card>
+        <v-card class="mt-2">
+            <v-container>
+                <div class="teal--text">Role</div>
+                <div
+                    class="d-flex align-center justify-space-between"
+                >
+                    <div>{{ dataUser.role }}</div>
+                </div>
+            </v-container>
+        </v-card>
     </v-card>
   </div>
 </template>

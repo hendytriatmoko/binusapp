@@ -21,7 +21,7 @@
                             show-adjacent-months
                         ></v-date-picker>
                     </v-card>
-                    <v-card class="mt-3 pa-2">
+                    <v-card v-if="dataUser.role != 'User'" class="mt-3 pa-2">
                         <h3 class="title">File Upload</h3>
                         <v-text-field
                             label="Nama"
@@ -132,7 +132,7 @@
                             </template>
                             <template v-slot:[`item.action`]="{ item }">
                               <div class="ma-1">
-                                <v-btn @click="direktoriFile = item.file,namaHapusFile = item.nama_file,idHapusFile = item.id_file,dialogHapus = true" color="red lighten-1" small>
+                                <v-btn v-if="dataUser.role != 'User'" @click="direktoriFile = item.file,namaHapusFile = item.nama_file,idHapusFile = item.id_file,dialogHapus = true" color="red lighten-1" small>
                                     <v-icon small>mdi-delete</v-icon> Delete
                                 </v-btn>
                                 <v-btn color="#FCC35B" @click="goKarakterisasi(item.id_file)" small>
@@ -183,6 +183,7 @@ export default {
   },
   data: () => ({
     search:'',
+    dataUser:'',
     namaFile:'',
     file:null,
     pickDate:'',
@@ -326,6 +327,7 @@ export default {
     }
   },
   async created(){
+    this.dataUser = this.$cookies.get('user')
     await this.getFile()
     // this.arrayDate = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
     // console.log('date arr', this.arrayDate)
