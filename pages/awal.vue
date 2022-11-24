@@ -166,6 +166,12 @@
                                 <div>{{index+1 + '. ' +item}}</div>
                             </div>
                         </div>
+                        <div v-if="memori != null" style="text-align:justify">
+                            <div>Terdapat beberapa pembacaan memori kasasi yang berbunyi sebagai berikut:</div>
+                            <div v-for="(item,index) in memori" :key="index">
+                                <div>{{index+1 + '. ' +item}}</div>
+                            </div>
+                        </div>
                         <div v-if="alasanKasasiArrayNew != null" style="text-align:justify">
                             Terdapat pertimbangan berdasarkan alasan kasasi <span>{{ alasanKasasiArrayNew[0] }}</span>
                             <div v-for="(item,index) in alasanKasasiArrayNew" :key="index">
@@ -257,6 +263,14 @@
                             <div style="text-align:justify">
                                 <div v-for="(item,index) in akta" :key="index">
                                     <div><i>"......</i><i>{{index+1 + '. ' +item}}</i><i>......"</i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="memori != null" class="my-5">
+                            <h4><b>Memori Kasasi</b></h4>
+                            <div style="text-align:justify">
+                                <div v-for="(item,index) in memori" :key="index">
+                                    <div><i>"......</i><i>{{index+1 + '. Membaca memori' +item}}</i><i>......"</i></div>
                                 </div>
                             </div>
                         </div>
@@ -420,6 +434,8 @@ export default {
     amarPTArray:null,
 
     akta:null,
+
+    memori:null,
 
     alasanKasasi:null,
     alasanKasasiArray:null,
@@ -627,6 +643,19 @@ export default {
             for (let i = 0; i < akta.length; i++) {
 
                 var countSplit = this.akta[i].split(' ')
+                this.wordOfKarakterisasi += countSplit.length   
+            }
+        }
+    },
+    getMemori(){
+        var memori = this.cutTextLower('membaca memori',';')
+        if (memori != null) {
+            this.memori = memori           
+            // this.memori = this.memori.replace(':','')
+            // console.log(memori)
+            for (let i = 0; i < memori.length; i++) {
+
+                var countSplit = this.memori[i].split(' ')
                 this.wordOfKarakterisasi += countSplit.length   
             }
         }
@@ -845,6 +874,7 @@ export default {
         this.getAmarPN()
         this.getAmarPT()
         this.getAkta()
+        this.getMemori()
         this.getAlasanKasasi()
         this.getFaktorHukuman()
         this.getAmarMengadili()
