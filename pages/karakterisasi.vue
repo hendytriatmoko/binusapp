@@ -54,188 +54,225 @@
         <v-card class="mt-3">
             <v-row class="mx-1">
                 <v-col cols="12" md="8" sm="8">
+                    <!-- Karakterisasi Start -->
                     <v-card id="goPdf" class="px-4">
-                        <div ref="testHtml">
-                        <v-card-title>
-                            <v-spacer />
-                            <h6>Tanggal Putusan : {{tanggalPutusan != null ? tanggalPutusan : '-'}}</h6>
-                        </v-card-title>
-                        <center style="margin-top: 30px;margin-bottom: 30px;">
-                            <h2>Karakterisasi Putusan Hakim</h2>
-                            <h4>Nomor Putusan: {{nomorPutusan != null ? nomorPutusan : '-'}}</h4>
-                        </center>
-                        <br>
-                        <h5>Anotasi Oleh</h5>
-                        <!-- <center>
-                            <h4>Karakterisasi Putusan Hakim</h4>
-                        </center> -->
-                        <br>
-                        <!-- <h5>Pembuka</h5> -->
-                        <div>
-                            <p>{{ 
-                                'Pemeriksaan perkara tindak pidana korupsi dalam persidangan dimohonkan oleh '
-                                + dimohonkanOleh
-                            }}</p>
-                        </div>
-                        <br>
-                        <center>
-                            <table>
-                                <tr valign="top">
-                                    <td style="width:150px">Nama</td>
-                                    <td style="width:30px">:</td>
-                                    <td style="width:300px">{{ namaTerdakwa != null ? namaTerdakwa : '-'}}</td>
-                                </tr>
-                                <tr valign="top">
-                                    <td>Umur</td>
-                                    <td >:</td>
-                                    <td>{{ umurTerdakwa != null ? umurTerdakwa : '-'}}</td>
-                                </tr>
-                                <tr valign="top">
-                                    <td>Jenis Kelamin</td>
-                                    <td>:</td>
-                                    <td>{{ genderTerdakwa != null ? genderTerdakwa : '-'}}</td>
-                                </tr>
-                                <tr valign="top">
-                                    <td>Tempat Tinggal</td>
-                                    <td>:</td>
-                                    <td>{{ tempatTinggal != null ? tempatTinggal : '-'}}</td>
-                                </tr>
-                                <tr valign="top">
-                                    <td>Pekerjaan</td>
-                                    <td>:</td>
-                                    <td>{{ pekerjaanTerdakwa != null ? pekerjaanTerdakwa : '-'}}</td>
-                                </tr>
-                            </table>
-                        </center>
+                        <div ref="testHtml" style="padding: 15px 15px; margin: auto; font-size: 16px; width: 700px; font-family: 'Times New Roman', Times, serif;">
+                            <v-card-title>
+                                <v-spacer />
+                                <h6>Tanggal Putusan : {{tanggalPutusan != null ? tanggalPutusan : '-'}}</h6>
+                            </v-card-title>
+                            <center style="margin-top: 30px;margin-bottom: 30px;">
+                                <h2>Karakterisasi Putusan Hakim</h2>
+                                <h4>Nomor Putusan: {{nomorPutusan != null ? nomorPutusan : '-'}}</h4>
+                            </center>
+                            <br>
+                            <!-- <h5>Anotasi Oleh</h5> -->
+                            <!-- <center>
+                                <h4>Karakterisasi Putusan Hakim</h4>
+                            </center> -->
+                            <br>
+                            <!-- <h5>Pembuka</h5> -->
+                            <div>
+                                <p>{{ 
+                                    'Pemeriksaan perkara tindak pidana korupsi dalam persidangan dimohonkan oleh '
+                                    + dimohonkanOleh
+                                }}</p>
+                            </div>
+                            <br>
+                            <center>
+                                <table>
+                                    <tr valign="top">
+                                        <td style="width:150px">Nama</td>
+                                        <td style="width:30px">:</td>
+                                        <td style="width:300px">{{ namaTerdakwa != null ? namaTerdakwa : '-'}}</td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td>Umur</td>
+                                        <td >:</td>
+                                        <td>{{ umurTerdakwa != null ? umurTerdakwa : '-'}}</td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td>Jenis Kelamin</td>
+                                        <td>:</td>
+                                        <td>{{ genderTerdakwa != null ? genderTerdakwa : '-'}}</td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td>Tempat Tinggal</td>
+                                        <td>:</td>
+                                        <td>{{ tempatTinggal != null ? tempatTinggal : '-'}}</td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td>Pekerjaan</td>
+                                        <td>:</td>
+                                        <td>{{ pekerjaanTerdakwa != null ? pekerjaanTerdakwa : '-'}}</td>
+                                    </tr>
+                                </table>
+                            </center>
                         
-                        <div class="mt-3">Dalam persidangan, bunyi dakwaan yang diberikan kepada terdakwa ialah sebagai berikut:</div>
-                        <div style="text-align:justify"><b>Primair :</b> <span>{{primair != null ? primair : '-'}}</span></div>
-                        <div style="text-align:justify"><b>Subsidair :</b> <span>{{subsidair != null ? subsidair : '-'}}</span></div>
-                        <div style="text-align:justify"><b>Lebih Subsidair :</b> <span>{{lebihSubsidair != null ? lebihSubsidair : '-'}}</span></div>
-                        <br>
-                        <div v-if="tuntuanPidanaNama != null" style="text-align:justify">
-                            Kemudian bunyi dari pembacaan tuntutan pidana <span>{{ tuntuanPidanaNama }}</span>
-                        </div>
-                        <div v-if="tuntuanPidanaArray != null" style="text-align:justify">
-                            <div v-for="(item,index) in tuntuanPidanaArray" :key="index">
-                                <div v-if="index+1 != tuntuanPidanaArray.length">{{ index+1 + '. ' +item }}</div>
+                            <div class="mt-3">Dalam persidangan, bunyi dakwaan yang diberikan kepada terdakwa ialah sebagai berikut:</div>
+                            <div style="text-align:justify"><b>Primair :</b> <span>{{primair != null ? primair : '-'}}</span></div>
+                            <div style="text-align:justify"><b>Subsidair :</b> <span>{{subsidair != null ? subsidair : '-'}}</span></div>
+                            <div style="text-align:justify"><b>Lebih Subsidair :</b> <span>{{lebihSubsidair != null ? lebihSubsidair : '-'}}</span></div>
+                            <br>
+
+                            <div v-if="tuntuanPidanaNama != null" style="text-align:justify">
+                                Kemudian bunyi dari pembacaan tuntutan pidana <span>{{ tuntuanPidanaNama }}</span>
                             </div>
-                        </div>
-                        <br>
-                        <div v-if="amarPNNama != null" style="text-align:justify">
-                            Berdasarkan perjalanan hukum yang telah berjalan, terdapat beberapa pembacaan putusan
-                             yang telah dikeluarkan oleh pengadilan. Pada proses pengadilan yang pertama dibacakan 
-                             putusan pengadilan tindak pidana korupsi pada pengadilan negeri
-                             <span>{{ amarPNNama }}</span>
-                        </div>
-                        <br>
-                        <div v-if="amarPNArray != null" style="text-align:justify">
-                            <center>
-                                <h5>Ammar Pengadilan Negeri</h5>
-                            </center>
-                            <div v-for="(item,index) in amarPNArray" :key="index">
-                                <div v-if="index+1 != amarPNArray.length">{{ index+1 + '. ' +item }}</div>
+
+                            <div v-if="tuntuanPidanaArray != null" style="text-align:justify">
+                                <div v-for="(item,index) in tuntuanPidanaArray" :key="index">
+                                    <div v-if="index+1 != tuntuanPidanaArray.length">{{ index+1 + '. ' +item }}</div>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div style="text-align:justify">
-                            Kemudian 
-                            <span v-if="amarPTNama != ''">
-                                {{  
-                                    'pengadilan dilanjutkan pada tingkat selanjutnya yang terdapat beberapa penyampaian dari pembacaan putusan pengadilan tindak pidana korupsi pada pengadilan tinggi '
-                                    + amarPTNama
-                                }}
-                            </span>
-                            <span v-else>
-                                proses pengadilan tidak dilanjutkan ke pengadilan tinggi
-                            </span>
-                        </div>
-                        <br>
-                        <div v-if="amarPTArray != null" style="text-align:justify">
-                            <center>
-                                <h5>Ammar Pengadilan Tinggi</h5>
-                            </center>
-                            <div v-for="(item,index) in amarPTArray" :key="index">
-                                <div v-if="index+1 != amarPTArray.length">{{ index+1 + '. ' +item }}</div>
+
+                            <br>
+
+                            <div v-if="amarPNNama != null" style="text-align:justify">
+                                Berdasarkan perjalanan hukum yang telah berjalan, terdapat beberapa pembacaan putusan
+                                yang telah dikeluarkan oleh pengadilan. Pada proses pengadilan yang pertama dibacakan 
+                                putusan pengadilan tindak pidana korupsi pada pengadilan negeri
+                                <span>{{ amarPNNama }}</span>
                             </div>
-                        </div>
-                        <br>
-                        <div v-if="akta != null" style="text-align:justify">
-                            <div>Terdapat beberapa pembacaan akta permohonan kasasi yang berbunyi sebagai berikut:</div>
-                            <div v-for="(item,index) in akta" :key="index">
-                                <div>{{index+1 + '. ' +item}}</div>
-                            </div>
-                        </div>
-                        <br>
-                        <div v-if="memori != null" style="text-align:justify">
-                            <div>Terdapat beberapa pembacaan memori kasasi yang berbunyi sebagai berikut:</div>
-                            <div v-for="(item,index) in memori" :key="index">
-                                <div>{{index+1 + '. ' +item}}</div>
-                            </div>
-                        </div>
-                        <br>
-                        <div v-if="alasanKasasiArrayNew != null" style="text-align:justify">
-                            Terdapat pertimbangan berdasarkan alasan kasasi <span>{{ alasanKasasiArrayNew[0] }}</span>
-                            <div v-for="(item,index) in alasanKasasiArrayNew" :key="index">
-                                <div v-if="index+1 != alasanKasasiArrayNew.length && index != 0" class="mt-2">{{ item }}</div>
-                            </div>
-                        </div>
-                        <br>
-                        <div v-if="pekerjaanTerdakwa != null" style="text-align:justify">
-                            Terdakwa sebagai <span>{{pekerjaanTerdakwa}}</span> memiliki faktor pertimbangan hukum :
-                        </div>
-                        <center>
-                            <table id="faktor" class="mt-3">
-                                <tr id="faktor" valign="top">
-                                    <th id="faktor" style="width:50%">Faktor yang Memberatkan</th>
-                                    <th id="faktor" style="width:50%">Faktor yang Meringankan</th>
-                                </tr>
-                                <tr id="faktor" style="text-align:justify" valign="top">
-                                    <td id="faktor" class="px-2">
-                                        <div v-if="faktorPemberatArray != null">
-                                            <div v-for="(item,index) in faktorPemberatArray" :key="index">
-                                                <div v-if="index+1 != faktorPemberatArray.length">{{index+1 + '. ' +item}}</div>
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            <p> - </p>
-                                        </div>
-                                    </td>
-                                    <td id="faktor" class="px-2">
-                                        <div v-if="faktorPeringanArray != null">
-                                            <div v-for="(item,index) in faktorPeringanArray" :key="index">
-                                                <div v-if="index+1 != faktorPeringanArray.length">{{index+1 + '. ' +item}}</div>
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            <p> - </p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </center>
-                        <br>
-                        <div v-if="amarMengadili != null" style="text-align:justify">
-                            <center>
-                                <h5>MENGADILI</h5>
-                            </center>
-                            Berdasarkan fakta peradilan yang ada, Mahkamah agung telah mempertimbangkan untuk 
-                            <div v-for="(item,index) in amarMengadiliArray" :key="index">
-                                <center v-if="item.includes('mengadili sendiri')">
+
+                            <br>
+                            <br>
+
+                            <div v-if="amarPNArray != null" style="text-align:justify">
+                                <center>
+                                    <h4>AMMAR PENGADILAN NEGERI</h4>
                                     <br>
-                                    <h5>MENGADILI SENDIRI</h5>
                                 </center>
-                                <div v-if="index+1 != amarMengadiliArray.length">{{ item == '' ? item : '-'+item}}</div>
+                                <div v-for="(item,index) in amarPNArray" :key="index">
+                                    <div v-if="index+1 != amarPNArray.length">{{ index+1 + '. ' +item }}</div>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div v-if="akhirPutusan != null" style="text-align:justify">
-                            {{'Demikianlah diputuskan '+ akhirPutusan}}
-                        </div>
+
+                            <br>
+
+                            <div style="text-align:justify">
+                                Kemudian 
+                                <span v-if="amarPTNama != ''">
+                                    {{  
+                                        'pengadilan dilanjutkan pada tingkat selanjutnya yang terdapat beberapa penyampaian dari pembacaan putusan pengadilan tindak pidana korupsi pada pengadilan tinggi '
+                                        + amarPTNama
+                                    }}
+                                </span>
+                                <span v-else>
+                                    proses pengadilan tidak dilanjutkan ke pengadilan tinggi
+                                </span>
+                            </div>
+
+                            <br>
+                            <br>
+
+                            <div v-if="amarPTArray != null" style="text-align:justify">
+                                <center>
+                                    <h4>AMMAR PENGADILAN TINGGI</h4>
+                                    <br>
+                                </center>
+                                <div v-for="(item,index) in amarPTArray" :key="index">
+                                    <div v-if="index+1 != amarPTArray.length">{{ index+1 + '. ' +item }}</div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div v-if="akta != null" style="text-align:justify">
+                                <div>Terdapat beberapa pembacaan akta permohonan kasasi yang berbunyi sebagai berikut:</div>
+                                <div v-for="(item,index) in akta" :key="index">
+                                    <div>{{index+1 + '. ' +item}}</div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div v-if="memori != null" style="text-align:justify">
+                                <div>Terdapat beberapa pembacaan memori kasasi yang berbunyi sebagai berikut:</div>
+                                <div v-for="(item,index) in memori" :key="index">
+                                    <div>{{index+1 + '. ' +item}}</div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div v-if="alasanKasasiArrayNew != null" style="text-align:justify">
+                                Terdapat pertimbangan berdasarkan alasan kasasi <span>{{ alasanKasasiArrayNew[0] }}</span>
+                                <div v-for="(item,index) in alasanKasasiArrayNew" :key="index">
+                                    <div v-if="index+1 != alasanKasasiArrayNew.length && index != 0" class="mt-2">{{ item }}</div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div v-if="pekerjaanTerdakwa != null" style="text-align:justify">
+                                Terdakwa sebagai <span>{{pekerjaanTerdakwa}}</span> memiliki faktor pertimbangan hukum :
+                            </div>
+
+                            <center>
+                                <table id="faktor" class="mt-3">
+                                    <tr id="faktor" valign="top">
+                                        <th id="faktor" style="width:50%">Faktor yang Memberatkan</th>
+                                        <th id="faktor" style="width:50%">Faktor yang Meringankan</th>
+                                    </tr>
+
+                                    <tr id="faktor" style="text-align:justify" valign="top">
+                                        <td id="faktor" class="px-2">
+                                            <div v-if="faktorPemberatArray != null">
+                                                <div v-for="(item,index) in faktorPemberatArray" :key="index">
+                                                    <div v-if="index+1 != faktorPemberatArray.length">{{index+1 + '. ' +item}}</div>
+                                                </div>
+                                            </div>
+                                            <div v-else>
+                                                <p> - </p>
+                                            </div>
+                                        </td>
+                                        <td id="faktor" class="px-2">
+                                            <div v-if="faktorPeringanArray != null">
+                                                <div v-for="(item,index) in faktorPeringanArray" :key="index">
+                                                    <div v-if="index+1 != faktorPeringanArray.length">{{index+1 + '. ' +item}}</div>
+                                                </div>
+                                            </div>
+                                            <div v-else>
+                                                <p> - </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </center>
+
+                            <br>
+                            <br>
+
+                            <div v-if="amarMengadili != null" style="text-align:justify">
+                                <center>
+                                    <h4>MENGADILI</h4>
+                                    <br>
+                                </center>
+                                Berdasarkan fakta peradilan yang ada, Mahkamah agung telah mempertimbangkan untuk 
+                                <div v-for="(item,index) in amarMengadiliArray" :key="index">
+                                    <center v-if="item.includes('mengadili sendiri')">
+                                        <br>
+                                        <br>
+                                        <h4>MENGADILI SENDIRI</h4>
+                                        <br>
+                                    </center>
+                                    <div v-if="index+1 != amarMengadiliArray.length">{{ item == '' ? item : '-'+item}}</div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div v-if="akhirPutusan != null" style="text-align:justify">
+                                {{'Demikianlah diputuskan '+ akhirPutusan}}
+                            </div>
                         </div>
                     </v-card>
+                    <!-- Karakterisasi End -->
+
                     <br>
-                    <v-card id="resumePdf" class="px-4 py-5">
+
+                    <!-- Resume Start -->
+                    <v-card id="resumePdf" class="px-4 py-5" style="font-size: 16px; padding: 20px;font-family: 'Times New Roman', Times, serif;">
                         <center style="margin-top: 30px;margin-bottom: 30px;">
                             <h2>Resume</h2> 
                         </center>
@@ -254,20 +291,24 @@
                                 </tr>
                             </table>
                         </center>
+
                         <div class="my-5">
                             <div v-if="primair != null" class="my-5">
                                 <h4><b>Primair</b></h4>
                                 <div style="text-align:justify"><i>"......</i> <i>{{primair != null ? primair : '-'}}</i><i>......"</i></div>
                             </div>
+
                             <div v-if="subsidair != null" class="my-5">
                                 <h4><b>Subsidair</b></h4>
                                 <div style="text-align:justify"><i>"......</i>  <i>{{subsidair != null ? subsidair : '-'}}</i><i>......"</i></div>
                             </div>
+
                             <div v-if="lebihSubsidair != null" class="my-5">
                                 <h4><b>Lebih Subsidair</b></h4>
                                 <div style="text-align:justify"><i>"......</i>  <i>{{lebihSubsidair != null ? lebihSubsidair : '-'}}</i><i>......"</i></div>
                             </div>
                         </div>
+
                         <div v-if="akta != null" class="my-5">
                             <h4><b>Permohonan Kasasi</b></h4>
                             <div style="text-align:justify">
@@ -276,6 +317,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div v-if="memori != null" class="my-5">
                             <h4><b>Memori Kasasi</b></h4>
                             <div style="text-align:justify">
@@ -296,6 +338,7 @@
                                 <div v-if="index+1 != amarPTArray.length"><i>"......{{ index+1 + '. ' +item }}......"</i></div>
                             </div>
                         </div> -->
+
                         <div v-if="amarMengadili != null" class="my-5">
                             <h4><b>Amar Putusan Mahkamah Agung</b></h4>
                             <div v-for="(item,index) in amarMengadiliArray" :key="index">
@@ -306,8 +349,12 @@
                                 <div v-if="index+1 != amarMengadiliArray.length"><i>{{ item == '' ? item : '"......'+item+'......"'}}</i></div>
                             </div>
                         </div>
+
                     </v-card>
+                    <!-- Resume End -->
+
                     <br>
+
                     <!-- <v-card class="pa-2">
                         <h3>Resume :</h3>
                         <div>nomor : {{nomorPutusan}}</div>
@@ -393,10 +440,229 @@
                             </v-card>
                         </v-col>
                         <v-col cols="12" md="12" sm="12">
-                            <v-btn @click="downloadPdf()" color="#0A2A62" class="white--text" width="100%">
+                            <v-btn @click="downloadPdfs()" color="#0A2A62" class="white--text" width="100%">
                                 Download karakterisasi
                                 <v-icon class="ml-2">mdi-download</v-icon>
                             </v-btn>
+                        </v-col>
+                        <v-col>
+                            <h4 class="my-5" style="text-align: center">Review PDF</h4>
+                            <v-card>
+                                <!-- PDF Render -->
+                                <div ref="pdfHtml" style="padding: 15px 15px; font-size: 9px; text-align: justify; margin: auto; filter: blur(2px);-webkit-filter: blur(2px); line-height: 1.5;">
+                                    <!-- Start Tanggal Putusan -->
+                                    <v-spacer />
+                                    <p style="font-size: 9px; text-align: right !important;">Tanggal Putusan : {{tanggalPutusan != null ? tanggalPutusan : '-'}}</p>
+                                    <!-- End Tanggal Putusan -->
+                                    
+                                    <!-- Start Judul dan Nomor Karakterisasi  -->
+                                    <center style="margin-top: 30px;margin-bottom: 30px;">
+                                        <h2>Karakterisasi Putusan Hakim</h2>
+                                        <h4>Nomor Putusan: {{nomorPutusan != null ? nomorPutusan : '-'}}</h4>
+                                    </center>
+                                    <!-- End Judul dan Nomor Karakterisasi  -->
+                                    
+                                    <!-- Start Detail Indentitas -->
+                                    <div>
+                                        <p>{{ 
+                                            'Pemeriksaan perkara tindak pidana korupsi dalam persidangan dimohonkan oleh '
+                                            + dimohonkanOleh
+                                        }}</p>
+                                    </div>
+                                    <br>
+                                    <center>
+                                        <table>
+                                            <tr valign="top">
+                                                <td style="width:150px">Nama</td>
+                                                <td style="width:30px">:</td>
+                                                <td style="width:300px">{{ namaTerdakwa != null ? namaTerdakwa : '-'}}</td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td>Umur</td>
+                                                <td >:</td>
+                                                <td>{{ umurTerdakwa != null ? umurTerdakwa : '-'}}</td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td>Jenis Kelamin</td>
+                                                <td>:</td>
+                                                <td>{{ genderTerdakwa != null ? genderTerdakwa : '-'}}</td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td>Tempat Tinggal</td>
+                                                <td>:</td>
+                                                <td>{{ tempatTinggal != null ? tempatTinggal : '-'}}</td>
+                                            </tr>
+                                            <tr valign="top">
+                                                <td>Pekerjaan</td>
+                                                <td>:</td>
+                                                <td>{{ pekerjaanTerdakwa != null ? pekerjaanTerdakwa : '-'}}</td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                    <!-- End Detail Indentitas -->
+                                    
+                                    <!-- Start Bunyi Dakwaan -->
+                                    <div style="text-align:justify;margin-bottom: 30px;">
+                                        <p style="text-align:justify">
+                                            Dalam persidangan, bunyi dakwaan yang diberikan kepada terdakwa ialah sebagai berikut: <br>
+                                            <b>Primair :</b> <span>{{primair != null ? primair : '-'}}</span><br>
+                                            <b>Subsidair :</b> <span>{{subsidair != null ? subsidair : '-'}}</span><br>
+                                            <b>Lebih Subsidair :</b> <span>{{lebihSubsidair != null ? lebihSubsidair : '-'}}</span>
+                                        </p>
+                                    </div>
+                                    <!-- End Bunyi Dakwaan -->
+
+                                    <!-- Start Pembacaan Tuntutan Pidana-->
+                                    <div v-if="tuntuanPidanaNama != null" style="text-align:justify">
+                                        <p>Kemudian bunyi dari pembacaan tuntutan pidana {{ tuntuanPidanaNama }}</p> 
+                                    </div>
+                                                                 
+
+                                    <div v-if="tuntuanPidanaArray != null" style="text-align:justify;margin-bottom: 10px;">
+                                        <div v-for="(item,index) in tuntuanPidanaArray" :key="index">
+                                            <div v-if="index+1 != tuntuanPidanaArray.length">
+                                                <p>{{ index+1 + '. ' +item }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Pembacaan Tuntutan Pidana-->
+
+                                    <!-- Start Pembacaan Putusan -->
+                                    <div v-if="amarPNNama != null" style="text-align:justify;margin-bottom: 10px;">
+                                        <p>
+                                            Berdasarkan perjalanan hukum yang telah berjalan, terdapat beberapa pembacaan putusan
+                                            yang telah dikeluarkan oleh pengadilan. Pada proses pengadilan yang pertama dibacakan 
+                                            putusan pengadilan tindak pidana korupsi pada pengadilan negeri {{ amarPNNama }}
+                                        </p>
+                                    </div>
+                                    <!-- End Pembacaan Putusan -->
+
+                                    <!-- Start Ammar Pengadilan Negeri -->
+                                    <div v-if="amarPNArray != null" style="text-align:justify">
+                                        <center>
+                                            <h4 style="margin-bottom: 5px;">AMMAR PENGADILAN NEGERI</h4>
+                                        </center>
+                                        <div v-for="(item,index) in amarPNArray" :key="index">
+                                            <div v-if="index+1 != amarPNArray.length">
+                                                <p>{{ index+1 + '. ' +item }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Ammar Pengadilan Negeri -->
+
+                                     <!-- Start Pengkondisian Ammar Pengadilan Negeri Jika Lanjut Ke Ammar Pengadilan Tinggi -->
+                                    <div style="text-align:justify;margin-bottom: 10px;"> 
+                                        <p v-if="amarPTNama != ''">
+                                            {{  
+                                                'Kemudian pengadilan dilanjutkan pada tingkat selanjutnya yang terdapat beberapa penyampaian dari pembacaan putusan pengadilan tindak pidana korupsi pada pengadilan tinggi '
+                                                + amarPTNama
+                                            }}
+                                        </p>
+                                        <p v-else>
+                                            Kemudian proses pengadilan tidak dilanjutkan ke pengadilan tinggi
+                                        </p>
+                                    </div>
+                                    <!-- End Pengkondisian Ammar Pengadilan Negeri Jika Lanjut Ke Ammar Pengadilan Tinggi -->
+                                    
+                                    <!-- Start Ammar Pengadilan Tinggi -->
+                                    <div v-if="amarPTArray != null" style="text-align:justify;margin-bottom: 10px;">
+                                        <center>
+                                            <h4 style="margin-bottom: 5px;">AMMAR PENGADILAN TINGGI</h4>
+                                        </center>
+                                        <div v-for="(item,index) in amarPTArray" :key="index">
+                                            <div v-if="index+1 != amarPTArray.length">{{ index+1 + '. ' +item }}</div>
+                                        </div>
+                                    </div>
+                                    <!-- End Ammar Pengadilan Tinggi -->
+
+                                    <!-- Start Pembacaan Akta Permohonan Kasasi -->
+                                    <div v-if="akta != null" style="text-align:justify;margin-bottom: 10px;">
+                                        <p>Terdapat beberapa pembacaan akta permohonan kasasi yang berbunyi sebagai berikut:</p>
+                                        <div v-for="(item,index) in akta" :key="index">
+                                            <p>{{index+1 + '. ' +item}}.</p>
+                                        </div>
+                                    </div>
+                                    <!-- End Pembacaan Akta Permohonan Kasasi -->
+
+                                    <!-- Start Pembacaan Memori Kasasi -->
+                                    <div v-if="memori != null" style="text-align:justify;margin-bottom: 10px;">
+                                        <p>Terdapat beberapa pembacaan memori kasasi yang berbunyi sebagai berikut:</p>
+                                        <div v-for="(item,index) in memori" :key="index">
+                                            <p>{{index+1 + '. ' +item}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- End Pembacaan Memori Kasasi -->
+
+                                    <!-- Start Pertimbangan Alasan Kasasi -->
+                                    <div v-if="alasanKasasiArrayNew != null" style="text-align:justify;margin-bottom: 10px;">
+                                        <p>Terdapat pertimbangan berdasarkan alasan kasasi {{ alasanKasasiArrayNew[0] }}</p>
+                                        <div v-for="(item,index) in alasanKasasiArrayNew" :key="index">
+                                            <p v-if="index+1 != alasanKasasiArrayNew.length && index != 0" class="mt-2">{{ item }}</p>
+                                        </div>
+                                    </div>
+                                     <!-- End Pertimbangan Alasan Kasasi -->
+                                    
+                                    <!-- Start Faktor Pertimbangan Hukum -->
+                                    <div v-if="pekerjaanTerdakwa != null" style="text-align:justify;margin-bottom: 5px;">
+                                        <p>Terdakwa sebagai {{pekerjaanTerdakwa}} memiliki faktor pertimbangan hukum :</p>
+                                    </div>
+
+                                    <center>
+                                        <table id="faktor" class="mt-3" style="margin-bottom: 10px;">
+                                            <tr id="faktor" valign="top">
+                                                <th id="faktor" style="width:50%">Faktor yang Memberatkan</th>
+                                                <th id="faktor" style="width:50%">Faktor yang Meringankan</th>
+                                            </tr>
+
+                                            <tr id="faktor" style="text-align:justify" valign="top">
+                                                <td id="faktor" class="px-2">
+                                                    <div v-if="faktorPemberatArray != null">
+                                                        <div v-for="(item,index) in faktorPemberatArray" :key="index">
+                                                            <p v-if="index+1 != faktorPemberatArray.length">{{index+1 + '. ' +item}}.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div v-else>
+                                                        <p> - </p>
+                                                    </div>
+                                                </td>
+                                                <td id="faktor" class="px-2">
+                                                    <div v-if="faktorPeringanArray != null">
+                                                        <div v-for="(item,index) in faktorPeringanArray" :key="index">
+                                                            <div v-if="index+1 != faktorPeringanArray.length">{{index+1 + '. ' +item}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div v-else>
+                                                        <p> - </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                    <!-- End Faktor Pertimbangan Hukum -->
+                                    
+                                    <!-- Start Mengadili (Keputusan Mahkamah Agung) -->
+                                    <div v-if="amarMengadili != null" style="text-align:justify;margin-bottom: 10px;">
+                                        <center>
+                                            <h4>MENGADILI</h4>
+                                        </center>
+                                        <p>Berdasarkan fakta peradilan yang ada, Mahkamah agung telah mempertimbangkan untuk:</p> 
+                                        <div v-for="(item,index) in amarMengadiliArray" :key="index">
+                                            <center v-if="item.includes('mengadili sendiri')">
+                                                <div style="margin-bottom: 5px;margin-top: 10px;">
+                                                   <h4>MENGADILI SENDIRI</h4> 
+                                                </div>
+                                            </center>
+                                            <p v-if="index+1 != amarMengadiliArray.length">{{ item == '' ? item : '-'+item}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- End Mengadili (Keputusan Mahkamah Agung) -->
+
+                                    <div v-if="akhirPutusan != null" style="text-align:justify">
+                                        <p>{{'Demikianlah diputuskan '+ akhirPutusan}}.</p>
+                                    </div>
+                                </div>
+                                <!-- End PDF Render -->
+                            </v-card>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -816,9 +1082,7 @@ export default {
         console.log('ef', this.efektivitas)
     },
     downloadPdfs(){
-        var doc = new jsPDF('p', 'mm', [297, 210], 'a4');
-        doc.setFontSize(5);
-     
+        var doc = new jsPDF('p', 'px', 'a4');
         let margins = {
                 top: 80,
                 bottom: 60,
@@ -829,16 +1093,19 @@ export default {
         // doc.html(this.$refs.testHtml, 40, 80,{
         //     'width' : 522
         // });
+
         var nama = 'karakterisasi.pdf'
+        
         // doc.save('test.pdf');
-        doc.html(this.$refs.testHtml, {
-            margin:[20,20,20,20],
-            
+        doc.html(this.$refs.pdfHtml,  {
+            x: 0,
+            y: 0,
+            autoPaging: 'text',
+            margin:[30,20,40,20],
             callback: function(doc) {
                 doc.save(nama);
+                // doc.output('dataurlnewwindow')
             },
-            x: 10,
-            y: 10,
         });
     },
     downloadPdf(){
